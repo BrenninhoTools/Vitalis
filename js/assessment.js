@@ -1,14 +1,3 @@
-import { diseases, symptoms } from "./data.js";
-
-const symptomIndex = new Map(symptoms.map((symptom) => [symptom.key, symptom]));
-
-const totals = Object.fromEntries(
-  diseases.map((disease) => [
-    disease.id,
-    symptoms.reduce((sum, symptom) => sum + (symptom.weights[disease.id] || 0), 0)
-  ])
-);
-
 const outcomes = {
   urgent: {
     headline: "Respiratory warning signs detected",
@@ -53,17 +42,19 @@ function severityFor(selected, ranked) {
   return "mild";
 }
 
-export function assess(keys) {
-  const selected = [...new Set(keys)].map((key) => symptomIndex.get(key));
+export function assess(keys, diseases, symptoms) {
+  const index = new Map(symptoms.map((symptom) => [symptom.key, symptom]));
+  const selected = [...new Set(keys)].map((key) => index.get(key)).filter(Boolean);
 
   const ranked = diseases
     .map((disease) => {
+      const total = symptoms.reduce((sum, symptom) => sum + (symptom.weights[disease.id] || 0), 0);
       const raw = selected.reduce((sum, symptom) => sum + (symptom.weights[disease.id] || 0), 0);
       return {
         id: disease.id,
         name: disease.name,
         category: disease.category,
-        score: Math.round((raw / totals[disease.id]) * 100)
+        score: total ? Math.round((raw / total) * 100) : 0
       };
     })
     .filter((match) => match.score > 0)
@@ -74,6 +65,19 @@ export function assess(keys) {
   return { severity, ...outcomes[severity], matches: ranked };
 }
 
-export function isKnownSymptom(key) {
-  return symptomIndex.has(key);
+export function filterDiseases(diseases, type, query) {
+  const needle = (query || "").trim().toLowerCase().slice(0, 80);
+
+  return diseases.filter((disease) => {
+    if (type && type !== "all" && disease.type !== type) return false;
+    if (!needle) return true;
+    return [disease.name, disease.category, disease.shortDesc, disease.fullDesc]
+      .join(" ")
+      .toLowerCase()
+      .includes(needle);
+  });
+}
+
+export function publicSymptoms(symptoms) {
+  return symptoms.map(({ key, label, redFlag }) => ({ key, label, redFlag: Boolean(redFlag) }));
 }

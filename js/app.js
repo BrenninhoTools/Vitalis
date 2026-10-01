@@ -151,7 +151,7 @@ function stepEpisode(offset) {
 }
 
 async function shareEpisode() {
-  const link = `${location.origin}/#episode-${state.activeEpisode}`;
+  const link = `${location.origin}${location.pathname}#episode-${state.activeEpisode}`;
   try {
     await navigator.clipboard.writeText(link);
     toast("Episode link copied to clipboard");
@@ -471,7 +471,7 @@ function setupInstall() {
   });
 
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+    window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
   }
 }
 

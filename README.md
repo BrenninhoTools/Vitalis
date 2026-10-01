@@ -20,12 +20,16 @@ The site is a Progressive Web App. Open it in Chrome or Edge and use the Install
 index.html         Application page
 sw.js              Service worker
 manifest.json      Web app manifest
-server/            HTTP server, JSON API, static file serving
-server/data/       Episodes, conditions and symptom weights
-public/            Styles, scripts and icons
+css/ js/ icons/    Styles, scripts and icons
+data/              Episodes, conditions and symptom weights
+server/            HTTP server and JSON API
 ```
 
-Only `index.html`, `sw.js`, `manifest.json` and the contents of `public/` are served. Everything else in the project stays private.
+The Node server only serves the files and folders above. Everything else in the project stays private.
+
+## Static hosting
+
+The site also works on a static host such as GitHub Pages, including project sites under a subpath. All paths are relative. When the API is not available, the interface reads `data/` directly and runs the same assessment logic in the browser.
 
 ## API
 

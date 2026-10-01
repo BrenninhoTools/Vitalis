@@ -6,15 +6,10 @@ import { fileURLToPath } from "node:url";
 import { createGzip } from "node:zlib";
 import { sendText } from "./http.js";
 
-const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const root = path.join(projectRoot, "public");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-const rootFiles = new Map([
-  ["/", "index.html"],
-  ["/index.html", "index.html"],
-  ["/sw.js", "sw.js"],
-  ["/manifest.json", "manifest.json"]
-]);
+const publicFiles = new Set(["index.html", "sw.js", "manifest.json", "404.html", "favicon.svg"]);
+const publicDirs = new Set(["css", "js", "icons", "data"]);
 
 const mimeTypes = {
   ".html": "text/html; charset=utf-8",
@@ -32,11 +27,17 @@ const mimeTypes = {
 
 const compressible = new Set([".html", ".css", ".js", ".json", ".svg", ".txt"]);
 
+function isPublic(relative) {
+  if (publicFiles.has(relative)) return true;
+  const parts = relative.split(path.sep);
+  return parts.length > 1 && publicDirs.has(parts[0]);
+}
+
 async function resolveFile(pathname) {
-  const rootFile = rootFiles.get(pathname);
   const target = pathname.endsWith("/") ? `${pathname}index.html` : pathname;
-  const filePath = rootFile ? path.join(projectRoot, rootFile) : path.join(root, target);
-  if (!rootFile && !filePath.startsWith(root + path.sep)) return null;
+  const filePath = path.join(root, target);
+  const relative = path.relative(root, filePath);
+  if (relative.startsWith("..") || path.isAbsolute(relative) || !isPublic(relative)) return null;
 
   try {
     const info = await stat(filePath);

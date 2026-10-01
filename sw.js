@@ -1,16 +1,20 @@
-const version = "vitalis-v2";
+const version = "vitalis-v3";
 
 const shell = [
-  "/",
-  "/css/styles.css",
-  "/js/app.js",
-  "/js/api.js",
-  "/js/audio.js",
-  "/js/dom.js",
-  "/favicon.svg",
-  "/manifest.json",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png"
+  "./",
+  "css/styles.css",
+  "js/app.js",
+  "js/api.js",
+  "js/assessment.js",
+  "js/audio.js",
+  "js/dom.js",
+  "data/episodes.json",
+  "data/diseases.json",
+  "data/symptoms.json",
+  "favicon.svg",
+  "manifest.json",
+  "icons/icon-192.png",
+  "icons/icon-512.png"
 ];
 
 self.addEventListener("install", (event) => {
@@ -68,8 +72,8 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== self.location.origin) return;
 
   if (request.mode === "navigate") {
-    event.respondWith(networkFirst(request, "/"));
-  } else if (url.pathname.startsWith("/api/")) {
+    event.respondWith(networkFirst(request, "./"));
+  } else if (url.pathname.includes("/api/")) {
     event.respondWith(networkFirst(request));
   } else {
     event.respondWith(staleWhileRevalidate(request));
