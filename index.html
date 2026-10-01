@@ -3,549 +3,636 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vitalis Medical Platform</title>
+    <title>Vitalis Medical Documentary Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             scroll-behavior: smooth;
         }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0F172A;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #0D9488;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
         .gradient-text {
-            background: linear-gradient(135deg, #0F766E 0%, #1E3A8A 100%);
+            background: linear-gradient(135deg, #2DD4BF 0%, #3B82F6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .hero-gradient {
-            background: linear-gradient(135deg, #F0FDFA 0%, #EFF6FF 50%, #F0FDF4 100%);
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-teal-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-teal-500 selection:text-slate-950">
 
-    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+    <header class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-600 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-teal-500/20">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchMainTab('documentary')">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-teal-500 to-blue-600 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-teal-500/20">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
-                    <span class="text-2xl font-bold tracking-tight text-slate-900">Vitalis</span>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight text-white block leading-none">Vitalis</span>
+                        <span class="text-[10px] font-semibold text-teal-400 tracking-wider uppercase">Medical Cinema</span>
+                    </div>
                 </div>
 
-                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
-                    <a href="#services" class="hover:text-teal-600 transition-colors">Services</a>
-                    <a href="#doctors" class="hover:text-teal-600 transition-colors">Doctors</a>
-                    <a href="#symptomChecker" class="hover:text-teal-600 transition-colors">AI Symptom Checker</a>
-                    <a href="#dashboard" class="hover:text-teal-600 transition-colors">Health Portal</a>
-                    <a href="#contact" class="hover:text-teal-600 transition-colors">Contact</a>
+                <nav class="hidden md:flex items-center space-x-1 bg-slate-900/80 p-1.5 rounded-2xl border border-slate-800">
+                    <button id="navDoc" onclick="switchMainTab('documentary')" class="px-5 py-2.5 rounded-xl text-xs font-semibold transition-all bg-teal-500 text-slate-950 shadow-md">
+                        Docuseries
+                    </button>
+                    <button id="navTreat" onclick="switchMainTab('treatment')" class="px-5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all">
+                        Disease Protocols
+                    </button>
+                    <button id="navChecker" onclick="switchMainTab('symptoms')" class="px-5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all">
+                        Symptom Assessment
+                    </button>
+                    <button id="navInsights" onclick="switchMainTab('insights')" class="px-5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all">
+                        Clinical Insights
+                    </button>
                 </nav>
 
-                <div class="flex items-center gap-4">
-                    <a href="#doctors" class="bg-teal-600 hover:bg-teal-700 text-white font-medium px-5 py-2.5 rounded-xl shadow-md shadow-teal-600/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
-                        Book Appointment
-                    </a>
+                <div class="flex items-center gap-3">
+                    <button onclick="switchMainTab('treatment')" class="bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-400 hover:to-teal-500 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-lg shadow-teal-500/20">
+                        Treatment Guide
+                    </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="hero-gradient pt-16 pb-24 border-b border-slate-100 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8">
-                    <div class="inline-flex items-center gap-2 bg-teal-50 border border-teal-200 px-4 py-2 rounded-full text-teal-800 text-xs font-semibold uppercase tracking-wider">
-                        <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
-                        Next Generation Telemedicine Platform
-                    </div>
-                    
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                        Modern Healthcare for Your <span class="gradient-text">Well being</span>
-                    </h1>
-                    
-                    <p class="text-lg text-slate-600 max-w-xl leading-relaxed">
-                        Access top medical specialists, receive immediate AI symptom insights, and manage your family health records seamlessly with Vitalis.
-                    </p>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#symptomChecker" class="bg-slate-900 hover:bg-slate-800 text-white font-medium px-6 py-3.5 rounded-xl text-center shadow-lg transition-all hover:scale-[1.02]">
-                            Try AI Assessment
-                        </a>
-                        <a href="#doctors" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-medium px-6 py-3.5 rounded-xl text-center shadow-sm transition-all">
-                            Find Specialist
-                        </a>
+        <section id="tabDocumentary" class="space-y-8">
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-8 space-y-4">
+                    <div class="relative rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl group">
+                        <div class="aspect-video relative overflow-hidden bg-slate-950">
+                            <iframe id="videoPlayer" class="w-full h-full object-cover" src="https://www.youtube-nocookie.com/embed/8I4yJ-T8Akg?rel=0" title="Vitalis Medical Documentary Series" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200/60">
-                        <div>
-                            <div class="text-2xl font-bold text-slate-900">50k plus</div>
-                            <div class="text-xs text-slate-500 font-medium mt-1">Active Patients</div>
+                    <div class="p-6 rounded-3xl bg-slate-900/60 border border-slate-800/80 space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-4">
+                            <div>
+                                <span id="epCategory" class="inline-block px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 text-xs font-bold uppercase tracking-wider mb-2">
+                                    Episode 1 • Viral Immunology
+                                </span>
+                                <h1 id="epTitle" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                                    The Influenza Blueprint: How Viruses Invade
+                                </h1>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <button onclick="shareEpisode()" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-2 border border-slate-700 transition-all">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                                    Share Doc
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                            <div class="text-2xl font-bold text-slate-900">200 plus</div>
-                            <div class="text-xs text-slate-500 font-medium mt-1">Expert Doctors</div>
-                        </div>
-                        <div>
-                            <div class="text-2xl font-bold text-slate-900">99 percent</div>
-                            <div class="text-xs text-slate-500 font-medium mt-1">Satisfaction Rate</div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="relative">
-                    <div class="relative mx-auto max-w-md lg:max-w-none">
-                        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white">
-                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80" alt="Doctor Consultation" class="w-full h-96 object-cover" onerror="this.src='https://placehold.co/800x600/0F766E/FFFFFF?text=Vitalis+Healthcare'">
-                        </div>
-                        
-                        <div class="absolute -bottom-6 -left-6 glass-card p-4 rounded-2xl shadow-xl flex items-center gap-4 max-w-xs">
-                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">
-                                24/7
+                        <p id="epDescription" class="text-sm text-slate-300 leading-relaxed">
+                            Explore the molecular mechanisms behind seasonal influenza strains and viral cellular entry. Understand how human immune defenses respond during the first critical 48 hours of infection.
+                        </p>
+
+                        <div class="pt-4 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                            <div>
+                                <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold">Medical Director</span>
+                                <span class="text-xs font-semibold text-slate-200">Dr. Helena Vance, MD</span>
                             </div>
                             <div>
-                                <p class="text-sm font-semibold text-slate-800">Instant Care</p>
-                                <p class="text-xs text-slate-500">Doctors ready anytime</p>
+                                <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold">Scientific Topic</span>
+                                <span class="text-xs font-semibold text-teal-400">Influenza A and B</span>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold">Runtime</span>
+                                <span class="text-xs font-semibold text-slate-200">24 Minutes</span>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold">Clinical Level</span>
+                                <span class="text-xs font-semibold text-slate-200">Public Health</span>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="absolute -top-6 -right-6 glass-card p-4 rounded-2xl shadow-xl flex items-center gap-3">
-                            <div class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></div>
-                            <span class="text-xs font-semibold text-slate-700">Verified Medical Specialists</span>
-                        </div>
+                <div class="lg:col-span-4 space-y-4">
+                    <div class="flex items-center justify-between px-1">
+                        <h2 class="text-lg font-bold text-white tracking-tight">Documentary Series Episodes</h2>
+                        <span class="text-xs text-teal-400 font-semibold">Season 1</span>
+                    </div>
+
+                    <div class="space-y-3 custom-scrollbar overflow-y-auto max-h-[720px] pr-1" id="episodeList">
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="services" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-4">Complete Health Solutions</h2>
-                <p class="text-slate-600">Empowering your wellness journey through modern technology and expert human care.</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:border-teal-100 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Telehealth Visits</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Connect with doctors face to face from home. High definition video consults with secure encrypted privacy.</p>
-                </div>
-
-                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:border-teal-100 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Smart Symptom AI</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Analyze potential health issues instantly with advanced clinical decision engines before booking.</p>
-                </div>
-
-                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:border-teal-100 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Digital Prescriptions</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Receive electronic prescriptions sent directly to your preferred pharmacy within minutes of your appointment.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="symptomChecker" class="py-20 bg-slate-900 text-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-5 space-y-6">
-                    <div class="inline-flex items-center gap-2 bg-teal-500/20 text-teal-300 px-3 py-1 rounded-md text-xs font-semibold uppercase tracking-wider">
-                        Interactive Tool
-                    </div>
-                    <h2 class="text-3xl font-bold tracking-tight">AI Health Assistant</h2>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Select any symptoms you are experiencing for instant guidance and personalized recommendations.
+        <section id="tabTreatment" class="hidden space-y-8">
+            <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-teal-950 p-8 rounded-3xl border border-slate-800">
+                <div class="max-w-2xl space-y-3">
+                    <span class="px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 text-xs font-bold uppercase tracking-wider">
+                        Medical Guidance Protocols
+                    </span>
+                    <h2 class="text-3xl font-extrabold text-white tracking-tight">Disease Management and Recovery</h2>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        Evidence based clinical protocols for treating common viral flu, seasonal illnesses, and fever progression.
                     </p>
-                    <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-slate-400">
-                        Notice: This tool provides preliminary guidance only and does not replace official clinical medical advice.
-                    </div>
                 </div>
+            </div>
 
-                <div class="lg:col-span-7 bg-slate-800 p-8 rounded-3xl border border-slate-700 shadow-2xl">
-                    <h3 class="text-lg font-semibold text-white mb-4">Select Symptoms</h3>
-                    <div class="flex flex-wrap gap-2 mb-6" id="symptomContainer">
-                        <button onclick="toggleSymptom(this, 'Headache')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Headache</button>
-                        <button onclick="toggleSymptom(this, 'Fever')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Fever</button>
-                        <button onclick="toggleSymptom(this, 'Cough')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Cough</button>
-                        <button onclick="toggleSymptom(this, 'Fatigue')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Fatigue</button>
-                        <button onclick="toggleSymptom(this, 'Chest Tightness')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Chest Tightness</button>
-                        <button onclick="toggleSymptom(this, 'Dizziness')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Dizziness</button>
-                        <button onclick="toggleSymptom(this, 'Sore Throat')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Sore Throat</button>
+            <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-4" id="diseaseFilterBar">
+                <button onclick="filterDiseases('all', this)" class="disease-btn px-4 py-2 rounded-xl text-xs font-bold bg-teal-500 text-slate-950 shadow-md">All Conditions</button>
+                <button onclick="filterDiseases('flu', this)" class="disease-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-400 hover:text-white border border-slate-800">Influenza Flu</button>
+                <button onclick="filterDiseases('respiratory', this)" class="disease-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-400 hover:text-white border border-slate-800">Upper Respiratory</button>
+                <button onclick="filterDiseases('fever', this)" class="disease-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-400 hover:text-white border border-slate-800">Viral Fever</button>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="diseaseCardsGrid">
+            </div>
+        </section>
+
+        <section id="tabSymptoms" class="hidden space-y-8">
+            <div class="grid lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="space-y-3">
+                        <span class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider">
+                            Interactive Health Matrix
+                        </span>
+                        <h2 class="text-3xl font-extrabold text-white tracking-tight">Symptom Assessment Tool</h2>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Select present clinical indicators to cross reference against common viral profiles and receive care recommendations.
+                        </p>
                     </div>
 
-                    <div class="pt-6 border-t border-slate-700">
-                        <button onclick="analyzeSymptoms()" class="w-full bg-teal-500 hover:bg-teal-400 text-slate-900 font-bold py-3.5 rounded-xl transition-all">
-                            Evaluate Assessment
+                    <div class="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-4">
+                        <h3 class="text-sm font-bold text-white uppercase tracking-wider">Select Present Symptoms</h3>
+                        <div class="flex flex-wrap gap-2" id="symptomSelectorContainer">
+                            <button onclick="toggleSelectSymptom(this, 'highFever')" class="sym-pill px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 hover:border-teal-500 transition-all">High Fever</button>
+                            <button onclick="toggleSelectSymptom(this, 'dryCough')" class="sym-pill px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 hover:border-teal-500 transition-all">Persistent Dry Cough</button>
+                            <button onclick="toggleSelectSymptom(this, 'bodyAches')" class="sym-pill px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 hover:border-teal-500 transition-all">Severe Body Aches</button>
+                            <button onclick="toggleSelectSymptom(this, 'fatigue')" class="sym-pill px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 hover:border-teal-500 transition-all">Extreme Fatigue</button>
+                            <button onclick="toggleSelectSymptom(this, 'soreThroat')" class="sym-pill px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 hover:border-teal-500 transition-all">Sore Throat</button>
+                            <button onclick="toggleSelectSymptom(this, 'nasalCongestion')" class="sym-pill px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 hover:border-teal-500 transition-all">Nasal Congestion</button>
+                            <button onclick="toggleSelectSymptom(this, 'chills')" class="sym-pill px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 hover:border-teal-500 transition-all">Chills and Sweats</button>
+                            <button onclick="toggleSelectSymptom(this, 'shortnessOfBreath')" class="sym-pill px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 hover:border-teal-500 transition-all">Breathing Difficulty</button>
+                        </div>
+
+                        <button onclick="runSymptomEvaluation()" class="w-full mt-4 bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-400 hover:to-blue-500 text-slate-950 font-bold py-3.5 rounded-xl text-xs transition-all shadow-lg">
+                            Evaluate Clinical Profile
                         </button>
                     </div>
-
-                    <div id="assessmentResult" class="hidden mt-6 p-6 rounded-2xl bg-slate-900 border border-slate-700">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-bold uppercase tracking-wider text-teal-400">Analysis Summary</span>
-                            <span id="severityBadge" class="px-2.5 py-1 rounded-full text-xs font-semibold"></span>
-                        </div>
-                        <p id="assessmentText" class="text-sm text-slate-300 leading-relaxed mb-4"></p>
-                        <a href="#doctors" class="inline-block text-xs font-semibold text-teal-400 hover:text-teal-300 underline">Recommended Action: Schedule Doctor Consult &rarr;</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="doctors" class="py-20 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-                <div>
-                    <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Our Medical Specialists</h2>
-                    <p class="text-slate-600 mt-2">Book consultations with verified healthcare leaders.</p>
-                </div>
-                
-                <div class="flex flex-wrap gap-2" id="filterContainer">
-                    <button onclick="filterDoctors('All', this)" class="filter-btn active-filter bg-teal-600 text-white px-4 py-2 rounded-xl text-xs font-medium transition-all">All</button>
-                    <button onclick="filterDoctors('Cardiology', this)" class="filter-btn bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium transition-all hover:bg-slate-100">Cardiology</button>
-                    <button onclick="filterDoctors('Neurology', this)" class="filter-btn bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium transition-all hover:bg-slate-100">Neurology</button>
-                    <button onclick="filterDoctors('Pediatrics', this)" class="filter-btn bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium transition-all hover:bg-slate-100">Pediatrics</button>
-                    <button onclick="filterDoctors('Dermatology', this)" class="filter-btn bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium transition-all hover:bg-slate-100">Dermatology</button>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8" id="doctorGrid">
-            </div>
-        </div>
-    </section>
-
-    <section id="dashboard" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Patient Health Portal</h2>
-                <p class="text-slate-600 mt-2">Real time metrics and medical records access at your fingertips.</p>
-            </div>
-
-            <div class="p-8 rounded-3xl bg-slate-900 text-white shadow-2xl border border-slate-800">
-                <div class="grid lg:grid-cols-4 gap-6 mb-8">
-                    <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
-                        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-2">
-                            <span>Heart Rate</span>
-                            <span class="text-emerald-400">Normal</span>
-                        </div>
-                        <div class="text-3xl font-bold text-white">72 <span class="text-xs font-normal text-slate-400">BPM</span></div>
-                    </div>
-
-                    <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
-                        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-2">
-                            <span>Blood Pressure</span>
-                            <span class="text-emerald-400">Optimal</span>
-                        </div>
-                        <div class="text-3xl font-bold text-white">120/80</div>
-                    </div>
-
-                    <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
-                        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-2">
-                            <span>Sleep Duration</span>
-                            <span class="text-teal-400">Good</span>
-                        </div>
-                        <div class="text-3xl font-bold text-white">7.8 <span class="text-xs font-normal text-slate-400">Hours</span></div>
-                    </div>
-
-                    <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
-                        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-2">
-                            <span>Daily Steps</span>
-                            <span class="text-blue-400">84 percent</span>
-                        </div>
-                        <div class="text-3xl font-bold text-white">8,420</div>
-                    </div>
                 </div>
 
-                <div class="grid lg:grid-cols-2 gap-8 pt-6 border-t border-slate-800">
-                    <div>
-                        <h4 class="text-sm font-semibold text-slate-300 mb-4">Upcoming Schedule</h4>
-                        <div class="space-y-3" id="upcomingAppointmentsList">
-                            <div class="p-4 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-sm">
-                                        DR
-                                    </div>
-                                    <div>
-                                        <p class="text-sm font-semibold text-white">Dr. Sarah Jenkins</p>
-                                        <p class="text-xs text-slate-400">Cardiology Video Consultation</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg">Tomorrow, 10:00 AM</span>
+                <div class="lg:col-span-7">
+                    <div id="evaluationOutput" class="h-full p-8 rounded-3xl bg-slate-900 border border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="text-xs font-bold uppercase tracking-wider text-teal-400">Assessment Result</span>
+                                <span id="severityLevelTag" class="px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-400">Awaiting Inputs</span>
+                            </div>
+                            
+                            <h3 id="assessmentHeading" class="text-2xl font-bold text-white mb-4">Select symptoms to evaluate</h3>
+                            <p id="assessmentBody" class="text-sm text-slate-300 leading-relaxed mb-6">
+                                Our clinical matrix compares your selected indicators with viral influenza, acute upper respiratory infections, and seasonal colds to present customized treatment directions.
+                            </p>
+
+                            <div id="careStepsContainer" class="hidden space-y-3">
+                                <h4 class="text-xs font-bold uppercase text-slate-400 tracking-wider">Recommended Action Steps</h4>
+                                <ul id="careStepsList" class="space-y-2 text-xs text-slate-300">
+                                </ul>
                             </div>
                         </div>
-                    </div>
 
-                    <div>
-                        <h4 class="text-sm font-semibold text-slate-300 mb-4">Vitalis Health Index</h4>
-                        <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex items-center gap-6">
-                            <div class="relative w-24 h-24 flex items-center justify-center rounded-full bg-slate-900 border-4 border-teal-500 text-2xl font-bold text-white">
-                                92
-                            </div>
-                            <div>
-                                <h5 class="font-bold text-white text-base">Excellent Health Score</h5>
-                                <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-                                    Based on your recent consultations, vitals tracking, and lifestyle habits. Keep up the great work!
-                                </p>
-                            </div>
+                        <div class="mt-8 pt-6 border-t border-slate-800 text-[11px] text-slate-500">
+                            Important: This educational platform provides clinical context but does not substitute professional emergency care or direct medical diagnosis.
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer id="contact" class="bg-slate-950 text-slate-400 py-16 border-t border-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-10 mb-12">
-                <div class="space-y-4">
-                    <div class="flex items-center gap-2 text-white font-bold text-xl">
-                        <div class="w-8 h-8 rounded-lg bg-teal-600 flex items-center justify-center text-white">
-                            +
-                        </div>
-                        Vitalis
-                    </div>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                        Leading provider of reliable virtual consultations and modern healthcare management.
+        <section id="tabInsights" class="hidden space-y-8">
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
+                    <div class="w-10 h-10 rounded-2xl bg-teal-500/10 text-teal-400 flex items-center justify-center font-bold">01</div>
+                    <h3 class="text-lg font-bold text-white">Hydration Science</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Electrolyte balances maintain cellular fluid pressure during febrile responses. Oral rehydration solutions enhance systemic recovery significantly.
                     </p>
                 </div>
 
-                <div>
-                    <h5 class="text-white text-sm font-semibold mb-4">Navigation</h5>
-                    <ul class="space-y-2 text-xs">
-                        <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
-                        <li><a href="#doctors" class="hover:text-white transition-colors">Doctors Directory</a></li>
-                        <li><a href="#symptomChecker" class="hover:text-white transition-colors">AI Symptom Assistant</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h5 class="text-white text-sm font-semibold mb-4">Emergency</h5>
-                    <p class="text-xs text-slate-500 leading-relaxed mb-3">
-                        If you are experiencing a life threatening situation, call local emergency services immediately.
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
+                    <div class="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold">02</div>
+                    <h3 class="text-lg font-bold text-white">Fever Regulation</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Fever is an evolutionary defense mechanism inhibiting viral replication. Antipyretics should be utilized strategically under clinical oversight.
                     </p>
-                    <span class="text-teal-400 font-bold text-sm">Emergency Call: 911</span>
                 </div>
 
-                <div>
-                    <h5 class="text-white text-sm font-semibold mb-4">Contact Us</h5>
-                    <p class="text-xs text-slate-500">support@vitalishealth.com</p>
-                    <p class="text-xs text-slate-500 mt-1">100 Health Plaza, Suite 400</p>
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
+                    <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">03</div>
+                    <h3 class="text-lg font-bold text-white">Antiviral Timelines</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Targeted antiviral treatments demonstrate maximum efficacy when administered within 48 hours of initial symptomatic onset.
+                    </p>
                 </div>
             </div>
 
-            <div class="pt-8 border-t border-slate-900 text-center text-xs text-slate-600">
-                &copy; 2026 Vitalis Healthcare. All rights reserved.
+            <div class="p-8 rounded-3xl bg-slate-900/60 border border-slate-800 space-y-6">
+                <h3 class="text-xl font-bold text-white">Documentary Production Insights</h3>
+                <div class="grid md:grid-cols-2 gap-6 text-xs text-slate-300 leading-relaxed">
+                    <p>
+                        Vitalis Medical Cinema collaborates with leading virology institutes and clinical researchers worldwide. Our docuseries translates complex pathogenic studies into accessible visual medical narratives.
+                    </p>
+                    <p>
+                        Each episode undergoes rigorous peer review by board certified physicians and infectious disease experts to ensure factual clinical accuracy and safety guidelines.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-900 py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl bg-teal-500 flex items-center justify-center text-slate-950 font-bold text-sm">
+                    V
+                </div>
+                <span class="text-sm font-bold text-white tracking-wider">Vitalis Medical Platform</span>
+            </div>
+            <div class="text-xs text-slate-500">
+                &copy; 2026 Vitalis Educational Healthcare Media. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <div id="bookingModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+    <div id="protocolModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-8 space-y-6 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeProtocolModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
             
-            <h3 class="text-xl font-bold text-slate-900 mb-1">Book Consultation</h3>
-            <p id="modalDoctorName" class="text-xs text-teal-600 font-medium mb-6"></p>
+            <div class="space-y-2">
+                <span id="modalCategory" class="px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 text-xs font-bold uppercase tracking-wider"></span>
+                <h3 id="modalTitle" class="text-2xl font-extrabold text-white"></h3>
+            </div>
 
-            <form onsubmit="confirmBooking(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
-                    <input type="text" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-teal-500">
+            <div class="space-y-4">
+                <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+                    <h4 class="text-xs font-bold text-teal-400 uppercase tracking-wider">Clinical Description</h4>
+                    <p id="modalDesc" class="text-xs text-slate-300 leading-relaxed"></p>
                 </div>
 
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Select Date</label>
-                    <input type="date" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-teal-500">
+                <div class="space-y-2">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Core Treatment Protocols</h4>
+                    <ul id="modalProtocols" class="space-y-2 text-xs text-slate-300">
+                    </ul>
                 </div>
 
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Select Time Slot</label>
-                    <select class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-teal-500">
-                        <option>09:00 AM</option>
-                        <option>11:30 AM</option>
-                        <option>02:00 PM</option>
-                        <option>04:30 PM</option>
-                    </select>
+                <div class="space-y-2">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Recovery Timeline</h4>
+                    <p id="modalTimeline" class="text-xs text-slate-400 leading-relaxed p-4 rounded-2xl bg-slate-950/50 border border-slate-800/80"></p>
                 </div>
+            </div>
 
-                <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-xl transition-all shadow-md mt-4">
-                    Confirm Appointment
-                </button>
-            </form>
+            <button onclick="closeProtocolModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl text-xs transition-all border border-slate-700">
+                Close Treatment Guide
+            </button>
         </div>
     </div>
 
     <script>
-        const doctorsData = [
+        const episodesData = [
             {
                 id: 1,
-                name: "Dr. Sarah Jenkins",
-                specialty: "Cardiology",
-                rating: "4.9",
-                reviews: "128",
-                image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80"
+                title: "The Influenza Blueprint: How Viruses Invade",
+                category: "Episode 1 • Viral Immunology",
+                description: "Explore the molecular mechanisms behind seasonal influenza strains and viral cellular entry. Understand how human immune defenses respond during the first critical 48 hours of infection.",
+                videoUrl: "https://www.youtube-nocookie.com/embed/8I4yJ-T8Akg?rel=0",
+                duration: "24 min",
+                thumbnail: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=600&q=80"
             },
             {
                 id: 2,
-                name: "Dr. Marcus Vance",
-                specialty: "Neurology",
-                rating: "4.8",
-                reviews: "94",
-                image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80"
+                title: "Decoding the Common Cold vs Influenza",
+                category: "Episode 2 • Clinical Diagnosis",
+                description: "A comprehensive clinical comparison between Rhinoviruses and Orthomyxoviridae. Learn how symptomatic onset speeds differentiate upper respiratory infections from systemic flu.",
+                videoUrl: "https://www.youtube-nocookie.com/embed/y32S4E48cT4?rel=0",
+                duration: "18 min",
+                thumbnail: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80"
             },
             {
                 id: 3,
-                name: "Dr. Elena Rostova",
-                specialty: "Pediatrics",
-                rating: "5.0",
-                reviews: "210",
-                image: "https://images.unsplash.com/photo-1594824813566-78a933f2614d?auto=format&fit=crop&w=400&q=80"
+                title: "Fever and Immune Mobilization",
+                category: "Episode 3 • Human Physiology",
+                description: "Discover why human core temperatures rise during pathogenic attacks. Examine pyrogens, hypothalamic set point shifts, and effective fever management strategies.",
+                videoUrl: "https://www.youtube-nocookie.com/embed/QnQe0xW_JY4?rel=0",
+                duration: "22 min",
+                thumbnail: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80"
             },
             {
                 id: 4,
-                name: "Dr. Aris Thorne",
-                specialty: "Dermatology",
-                rating: "4.7",
-                reviews: "82",
-                image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80"
+                title: "Modern Antivirals and Hydration Protocols",
+                category: "Episode 4 • Pharmacology",
+                description: "An in depth look at neuraminidase inhibitors, cellular hydration mechanics, and symptom relief agents designed to shorten recovery timelines safely.",
+                videoUrl: "https://www.youtube-nocookie.com/embed/f_A8-C01tHk?rel=0",
+                duration: "20 min",
+                thumbnail: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80"
             }
         ];
 
-        let selectedSymptomsList = [];
-        let activeDoctorForBooking = "";
+        const diseasesData = [
+            {
+                id: "fluA",
+                name: "Seasonal Influenza (Flu A & B)",
+                type: "flu",
+                category: "Viral Infection",
+                shortDesc: "Systemic viral infection characterized by sudden high fever, body aches, and respiratory fatigue.",
+                fullDesc: "Influenza viruses infect the epithelial cells of the respiratory tract. Transmission occurs via aerosol droplets. Rapid onset requires immediate rest and early therapeutic intervention.",
+                protocols: [
+                    "Optimal bed rest during peak febrile periods (days 1 through 4)",
+                    "Oral rehydration solution containing balanced sodium and glucose",
+                    "Antipyretics used according to clinical guidelines for fever comfort",
+                    "Targeted antiviral therapies evaluated by healthcare professionals within 48 hours"
+                ],
+                timeline: "7 to 10 days for full acute symptom resolution. Persistent fatigue may continue for two weeks."
+            },
+            {
+                id: "rhino",
+                name: "Acute Rhinovirus Cold",
+                type: "respiratory",
+                category: "Upper Respiratory",
+                shortDesc: "Mild upper respiratory viral illness centered primarily in nasal passages and throat mucosa.",
+                fullDesc: "Rhinoviruses thrive in cooler nasal temperatures, causing localized swelling, sneezing, and clear mucosal secretions without severe systemic fever.",
+                protocols: [
+                    "Saline nasal rinses to clear congested airways gently",
+                    "Warm fluid consumption including honey infusions for sore throat ease",
+                    "Adequate sleep to facilitate endogenous immune antibody production",
+                    "Humidified air exposure to soothe inflamed upper airway passages"
+                ],
+                timeline: "5 to 7 days. Most individuals return to baseline activities within one week."
+            },
+            {
+                id: "viralFever",
+                name: "Systemic Viral Fever Syndrome",
+                type: "fever",
+                category: "Systemic Viral",
+                shortDesc: "Fever response accompanying non specific viral exposure, often causing chills and weakness.",
+                fullDesc: "Systemic immune signaling releases cytokines, triggering hypothalamic thermoregulation shifts that elevate body temperature to combat viral replication.",
+                protocols: [
+                    "Frequent core temperature monitoring every four hours",
+                    "Light breathable clothing and cool ambient room environments",
+                    "Continuous fluid intake to replenish perspiration losses",
+                    "Avoidance of heavy physical strain until fever subsides completely"
+                ],
+                timeline: "3 to 5 days of febrile activity followed by gradual energy recovery."
+            },
+            {
+                id: "bronchitis",
+                name: "Acute Viral Bronchitis",
+                type: "respiratory",
+                category: "Bronchial Airways",
+                shortDesc: "Inflammation of bronchial air passages following initial viral colds or flu infections.",
+                fullDesc: "Viral inflammation increases bronchial mucus production, leading to persistent coughing fits aimed at clearing bronchial passages.",
+                protocols: [
+                    "Steam inhalation treatments twice daily for bronchial relaxation",
+                    "Cough suppressant or expectorant formulations as guided by physicians",
+                    "Complete avoidance of environmental smoke or chemical irritants",
+                    "High volume fluid intake to thin bronchial secretions effectively"
+                ],
+                timeline: "10 to 21 days for bronchial cough clearance."
+            }
+        ];
 
-        function renderDoctors(filterCategory = "All") {
-            const grid = document.getElementById("doctorGrid");
-            grid.innerHTML = "";
+        let selectedSymptoms = [];
 
-            const filtered = filterCategory === "All" 
-                ? doctorsData 
-                : doctorsData.filter(doc => doc.specialty === filterCategory);
+        function switchMainTab(tabName) {
+            const tabs = ['documentary', 'treatment', 'symptoms', 'insights'];
+            tabs.forEach(tab => {
+                const el = document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1));
+                const nav = document.getElementById('nav' + (tab === 'documentary' ? 'Doc' : tab === 'treatment' ? 'Treat' : tab === 'symptoms' ? 'Checker' : 'Insights'));
+                
+                if (tab === tabName) {
+                    el.classList.remove('hidden');
+                    if (nav) {
+                        nav.className = 'px-5 py-2.5 rounded-xl text-xs font-semibold transition-all bg-teal-500 text-slate-950 shadow-md';
+                    }
+                } else {
+                    el.classList.add('hidden');
+                    if (nav) {
+                        nav.className = 'px-5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all';
+                    }
+                }
+            });
+        }
 
-            filtered.forEach(doc => {
-                const card = document.createElement("div");
-                card.className = "bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between";
+        function renderEpisodeList() {
+            const container = document.getElementById('episodeList');
+            container.innerHTML = '';
+
+            episodesData.forEach((ep, index) => {
+                const card = document.createElement('div');
+                card.className = `p-4 rounded-2xl bg-slate-900 border ${index === 0 ? 'border-teal-500/50 bg-teal-950/20' : 'border-slate-800'} hover:border-teal-500/40 cursor-pointer transition-all flex gap-4 items-center group`;
+                card.onclick = () => playEpisode(ep.id, card);
+
                 card.innerHTML = `
-                    <div>
-                        <img src="${doc.image}" alt="${doc.name}" class="w-full h-48 object-cover rounded-xl mb-4" onerror="this.src='https://placehold.co/400x300/0F766E/FFFFFF?text=Doctor'">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-semibold text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md">${doc.specialty}</span>
-                            <span class="text-xs font-bold text-slate-700 flex items-center gap-1">★ ${doc.rating} (${doc.reviews})</span>
+                    <div class="relative w-24 h-16 rounded-xl overflow-hidden bg-slate-950 flex-shrink-0">
+                        <img src="${ep.thumbnail}" alt="${ep.title}" class="w-full h-full object-cover group-hover:scale-105 transition-all">
+                        <div class="absolute inset-0 bg-slate-950/40 flex items-center justify-center">
+                            <div class="w-6 h-6 rounded-full bg-teal-500 text-slate-950 flex items-center justify-center font-bold text-xs">►</div>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900">${doc.name}</h3>
-                        <p class="text-xs text-slate-500 mt-1">Available for virtual & in person visits</p>
                     </div>
-                    <button onclick="openModal('${doc.name}')" class="mt-6 w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl text-xs transition-all">
-                        Schedule Visit
+                    <div class="flex-1 min-w-0">
+                        <span class="block text-[10px] font-bold text-teal-400 uppercase tracking-wider mb-0.5">${ep.category}</span>
+                        <h3 class="text-xs font-bold text-white truncate group-hover:text-teal-300 transition-colors">${ep.title}</h3>
+                        <span class="text-[10px] text-slate-500 mt-1 block">${ep.duration}</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function playEpisode(id, element) {
+            const ep = episodesData.find(e => e.id === id);
+            if (!ep) return;
+
+            document.getElementById('videoPlayer').src = ep.videoUrl;
+            document.getElementById('epTitle').innerText = ep.title;
+            document.getElementById('epCategory').innerText = ep.category;
+            document.getElementById('epDescription').innerText = ep.description;
+
+            document.querySelectorAll('#episodeList > div').forEach(child => {
+                child.className = 'p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-teal-500/40 cursor-pointer transition-all flex gap-4 items-center group';
+            });
+            if (element) {
+                element.className = 'p-4 rounded-2xl bg-slate-900 border border-teal-500/50 bg-teal-950/20 hover:border-teal-500/40 cursor-pointer transition-all flex gap-4 items-center group';
+            }
+        }
+
+        function shareEpisode() {
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = window.location.href;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-6 right-6 bg-teal-500 text-slate-950 px-6 py-3 rounded-2xl shadow-2xl text-xs font-bold z-50';
+            toast.innerText = 'Documentary link copied to clipboard';
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function renderDiseases(filterType = 'all') {
+            const grid = document.getElementById('diseaseCardsGrid');
+            grid.innerHTML = '';
+
+            const filtered = filterType === 'all' 
+                ? diseasesData 
+                : diseasesData.filter(d => d.type === filterType);
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'p-6 rounded-3xl bg-slate-900 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all';
+                
+                card.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 rounded-full bg-slate-800 text-teal-400 text-[10px] font-bold uppercase tracking-wider">${item.category}</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">${item.name}</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">${item.shortDesc}</p>
+                    </div>
+                    <button onclick="openProtocolModal('${item.id}')" class="mt-6 w-full bg-slate-800 hover:bg-slate-700 text-teal-400 font-bold py-2.5 rounded-xl text-xs transition-all border border-slate-700">
+                        View Treatment Protocol
                     </button>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        function filterDoctors(category, btnElement) {
-            document.querySelectorAll(".filter-btn").forEach(btn => {
-                btn.className = "filter-btn bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium transition-all hover:bg-slate-100";
+        function filterDiseases(type, btnElement) {
+            document.querySelectorAll('.disease-btn').forEach(b => {
+                b.className = 'disease-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-400 hover:text-white border border-slate-800';
             });
-            btnElement.className = "filter-btn bg-teal-600 text-white px-4 py-2 rounded-xl text-xs font-medium transition-all";
-            renderDoctors(category);
+            btnElement.className = 'disease-btn px-4 py-2 rounded-xl text-xs font-bold bg-teal-500 text-slate-950 shadow-md';
+            renderDiseases(type);
         }
 
-        function toggleSymptom(btn, symptomName) {
-            if (selectedSymptomsList.includes(symptomName)) {
-                selectedSymptomsList = selectedSymptomsList.filter(item => item !== symptomName);
-                btn.classList.remove("bg-teal-500", "text-slate-900", "font-bold");
-                btn.classList.add("bg-slate-700", "text-slate-200");
+        function openProtocolModal(id) {
+            const item = diseasesData.find(d => d.id === id);
+            if (!item) return;
+
+            document.getElementById('modalCategory').innerText = item.category;
+            document.getElementById('modalTitle').innerText = item.name;
+            document.getElementById('modalDesc').innerText = item.fullDesc;
+            document.getElementById('modalTimeline').innerText = item.timeline;
+
+            const list = document.getElementById('modalProtocols');
+            list.innerHTML = '';
+            item.protocols.forEach(p => {
+                const li = document.createElement('li');
+                li.className = 'flex items-start gap-2';
+                li.innerHTML = `<span class="text-teal-400 font-bold">•</span> <span>${p}</span>`;
+                list.appendChild(li);
+            });
+
+            document.getElementById('protocolModal').classList.remove('hidden');
+        }
+
+        function closeProtocolModal() {
+            document.getElementById('protocolModal').classList.add('hidden');
+        }
+
+        function toggleSelectSymptom(btn, symptomKey) {
+            if (selectedSymptoms.includes(symptomKey)) {
+                selectedSymptoms = selectedSymptoms.filter(s => s !== symptomKey);
+                btn.className = 'sym-pill px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 hover:border-teal-500 transition-all';
             } else {
-                selectedSymptomsList.push(symptomName);
-                btn.classList.remove("bg-slate-700", "text-slate-200");
-                btn.classList.add("bg-teal-500", "text-slate-900", "font-bold");
+                selectedSymptoms.push(symptomKey);
+                btn.className = 'sym-pill px-3.5 py-2 rounded-xl bg-teal-500 text-slate-950 text-xs font-bold border border-teal-400 shadow-md transition-all';
             }
         }
 
-        function analyzeSymptoms() {
-            const resultBox = document.getElementById("assessmentResult");
-            const badge = document.getElementById("severityBadge");
-            const text = document.getElementById("assessmentText");
+        function runSymptomEvaluation() {
+            const tag = document.getElementById('severityLevelTag');
+            const heading = document.getElementById('assessmentHeading');
+            const body = document.getElementById('assessmentBody');
+            const stepsContainer = document.getElementById('careStepsContainer');
+            const stepsList = document.getElementById('careStepsList');
 
-            if (selectedSymptomsList.length === 0) {
-                resultBox.classList.remove("hidden");
-                badge.className = "px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-400";
-                badge.innerText = "Attention";
-                text.innerText = "Please select at least one symptom to run the AI assessment.";
+            if (selectedSymptoms.length === 0) {
+                tag.className = 'px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-400';
+                tag.innerText = 'No Symptoms Selected';
+                heading.innerText = 'Please choose current indicators';
+                body.innerText = 'Select one or more symptoms from the matrix on the left to analyze recovery recommendations.';
+                stepsContainer.classList.add('hidden');
                 return;
             }
 
-            resultBox.classList.remove("hidden");
+            stepsList.innerHTML = '';
+            stepsContainer.classList.remove('hidden');
 
-            if (selectedSymptomsList.includes("Chest Tightness") || selectedSymptomsList.includes("Dizziness")) {
-                badge.className = "px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-500/20 text-rose-400";
-                badge.innerText = "High Priority";
-                text.innerText = "Symptoms like Chest Tightness or Dizziness require immediate attention. We advise scheduling an urgent appointment or contacting medical emergency services.";
+            if (selectedSymptoms.includes('shortnessOfBreath') || (selectedSymptoms.includes('highFever') && selectedSymptoms.includes('bodyAches'))) {
+                tag.className = 'px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-400';
+                tag.innerText = 'Influenza or Acute Infection';
+                heading.innerText = 'High Febrile / Respiratory Profile Detected';
+                body.innerText = 'Your selections strongly align with acute viral influenza or lower airway involvement. Early clinical evaluation is recommended.';
+                
+                const steps = [
+                    'Schedule a consultation with a healthcare provider within 24 to 48 hours',
+                    'Initiate structured oral hydration with electrolyte balancing solutions',
+                    'Maintain absolute rest in a well ventilated isolated environment',
+                    'Monitor oxygen saturation and temperature every four hours'
+                ];
+                steps.forEach(s => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center gap-2';
+                    li.innerHTML = `<span class="text-rose-400 font-bold">✓</span> <span>${s}</span>`;
+                    stepsList.appendChild(li);
+                });
             } else {
-                badge.className = "px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400";
-                badge.innerText = "Mild Severity";
-                text.innerText = "Selected symptoms suggest a mild routine issue. Ensure rest, stay hydrated, and consult a doctor if symptoms persist over 48 hours.";
+                tag.className = 'px-3 py-1 rounded-full text-xs font-bold bg-teal-500/20 text-teal-400';
+                tag.innerText = 'Mild Upper Respiratory Profile';
+                heading.innerText = 'Mild Viral Cold Pattern';
+                body.innerText = 'Your reported symptoms correspond to typical seasonal rhinovirus cold patterns or mild viral exposure.';
+                
+                const steps = [
+                    'Ensure 8 to 10 hours of restorative sleep daily',
+                    'Increase warm fluid consumption including herbal teas and broths',
+                    'Use saline sprays or steam inhalation for airway comfort',
+                    'Monitor symptoms for any sudden changes or secondary fever spikes'
+                ];
+                steps.forEach(s => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center gap-2';
+                    li.innerHTML = `<span class="text-teal-400 font-bold">✓</span> <span>${s}</span>`;
+                    stepsList.appendChild(li);
+                });
             }
         }
 
-        function openModal(docName) {
-            activeDoctorForBooking = docName;
-            document.getElementById("modalDoctorName").innerText = docName;
-            document.getElementById("bookingModal").classList.remove("hidden");
-        }
-
-        function closeModal() {
-            document.getElementById("bookingModal").classList.add("hidden");
-        }
-
-        function confirmBooking(event) {
-            event.preventDefault();
-            closeModal();
-            
-            const upcomingList = document.getElementById("upcomingAppointmentsList");
-            const newItem = document.createElement("div");
-            newItem.className = "p-4 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-between";
-            newItem.innerHTML = `
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-sm">
-                        DR
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-white">${activeDoctorForBooking}</p>
-                        <p class="text-xs text-slate-400">Scheduled Visit</p>
-                    </div>
-                </div>
-                <span class="text-xs bg-teal-500/20 text-teal-300 px-3 py-1.5 rounded-lg font-semibold">Confirmed</span>
-            `;
-            upcomingList.prepend(newItem);
-
-            const toast = document.createElement("div");
-            toast.className = "fixed bottom-6 right-6 bg-emerald-600 text-white px-6 py-4 rounded-2xl shadow-2xl text-xs font-semibold z-50";
-            toast.innerText = "Appointment successfully scheduled with " + activeDoctorForBooking;
-            document.body.appendChild(toast);
-
-            setTimeout(() => {
-                toast.remove();
-            }, 4000);
-        }
-
         window.onload = function() {
-            renderDoctors();
+            renderEpisodeList();
+            renderDiseases();
         };
     </script>
 </body>
