@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitalis Medical Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0F766E 0%, #1E3A8A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #F0FDFA 0%, #EFF6FF 50%, #F0FDF4 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-teal-500 selection:text-white">
+
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-600 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-teal-500/20">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold tracking-tight text-slate-900">Vitalis</span>
+                </div>
+
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
+                    <a href="#services" class="hover:text-teal-600 transition-colors">Services</a>
+                    <a href="#doctors" class="hover:text-teal-600 transition-colors">Doctors</a>
+                    <a href="#symptomChecker" class="hover:text-teal-600 transition-colors">AI Symptom Checker</a>
+                    <a href="#dashboard" class="hover:text-teal-600 transition-colors">Health Portal</a>
+                    <a href="#contact" class="hover:text-teal-600 transition-colors">Contact</a>
+                </nav>
+
+                <div class="flex items-center gap-4">
+                    <a href="#doctors" class="bg-teal-600 hover:bg-teal-700 text-white font-medium px-5 py-2.5 rounded-xl shadow-md shadow-teal-600/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
+                        Book Appointment
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-gradient pt-16 pb-24 border-b border-slate-100 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center gap-2 bg-teal-50 border border-teal-200 px-4 py-2 rounded-full text-teal-800 text-xs font-semibold uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
+                        Next Generation Telemedicine Platform
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        Modern Healthcare for Your <span class="gradient-text">Well being</span>
+                    </h1>
+                    
+                    <p class="text-lg text-slate-600 max-w-xl leading-relaxed">
+                        Access top medical specialists, receive immediate AI symptom insights, and manage your family health records seamlessly with Vitalis.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#symptomChecker" class="bg-slate-900 hover:bg-slate-800 text-white font-medium px-6 py-3.5 rounded-xl text-center shadow-lg transition-all hover:scale-[1.02]">
+                            Try AI Assessment
+                        </a>
+                        <a href="#doctors" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-medium px-6 py-3.5 rounded-xl text-center shadow-sm transition-all">
+                            Find Specialist
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200/60">
+                        <div>
+                            <div class="text-2xl font-bold text-slate-900">50k plus</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Active Patients</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-slate-900">200 plus</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Expert Doctors</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-slate-900">99 percent</div>
+                            <div class="text-xs text-slate-500 font-medium mt-1">Satisfaction Rate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white">
+                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80" alt="Doctor Consultation" class="w-full h-96 object-cover" onerror="this.src='https://placehold.co/800x600/0F766E/FFFFFF?text=Vitalis+Healthcare'">
+                        </div>
+                        
+                        <div class="absolute -bottom-6 -left-6 glass-card p-4 rounded-2xl shadow-xl flex items-center gap-4 max-w-xs">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">
+                                24/7
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-800">Instant Care</p>
+                                <p class="text-xs text-slate-500">Doctors ready anytime</p>
+                            </div>
+                        </div>
+
+                        <div class="absolute -top-6 -right-6 glass-card p-4 rounded-2xl shadow-xl flex items-center gap-3">
+                            <div class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></div>
+                            <span class="text-xs font-semibold text-slate-700">Verified Medical Specialists</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-4">Complete Health Solutions</h2>
+                <p class="text-slate-600">Empowering your wellness journey through modern technology and expert human care.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:border-teal-100 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Telehealth Visits</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Connect with doctors face to face from home. High definition video consults with secure encrypted privacy.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:border-teal-100 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Smart Symptom AI</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Analyze potential health issues instantly with advanced clinical decision engines before booking.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:border-teal-100 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Digital Prescriptions</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Receive electronic prescriptions sent directly to your preferred pharmacy within minutes of your appointment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="symptomChecker" class="py-20 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-teal-500/20 text-teal-300 px-3 py-1 rounded-md text-xs font-semibold uppercase tracking-wider">
+                        Interactive Tool
+                    </div>
+                    <h2 class="text-3xl font-bold tracking-tight">AI Health Assistant</h2>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Select any symptoms you are experiencing for instant guidance and personalized recommendations.
+                    </p>
+                    <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-slate-400">
+                        Notice: This tool provides preliminary guidance only and does not replace official clinical medical advice.
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-slate-800 p-8 rounded-3xl border border-slate-700 shadow-2xl">
+                    <h3 class="text-lg font-semibold text-white mb-4">Select Symptoms</h3>
+                    <div class="flex flex-wrap gap-2 mb-6" id="symptomContainer">
+                        <button onclick="toggleSymptom(this, 'Headache')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Headache</button>
+                        <button onclick="toggleSymptom(this, 'Fever')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Fever</button>
+                        <button onclick="toggleSymptom(this, 'Cough')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Cough</button>
+                        <button onclick="toggleSymptom(this, 'Fatigue')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Fatigue</button>
+                        <button onclick="toggleSymptom(this, 'Chest Tightness')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Chest Tightness</button>
+                        <button onclick="toggleSymptom(this, 'Dizziness')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Dizziness</button>
+                        <button onclick="toggleSymptom(this, 'Sore Throat')" class="symptom-btn bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-4 py-2.5 rounded-xl border border-slate-600 transition-all">Sore Throat</button>
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-700">
+                        <button onclick="analyzeSymptoms()" class="w-full bg-teal-500 hover:bg-teal-400 text-slate-900 font-bold py-3.5 rounded-xl transition-all">
+                            Evaluate Assessment
+                        </button>
+                    </div>
+
+                    <div id="assessmentResult" class="hidden mt-6 p-6 rounded-2xl bg-slate-900 border border-slate-700">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-teal-400">Analysis Summary</span>
+                            <span id="severityBadge" class="px-2.5 py-1 rounded-full text-xs font-semibold"></span>
+                        </div>
+                        <p id="assessmentText" class="text-sm text-slate-300 leading-relaxed mb-4"></p>
+                        <a href="#doctors" class="inline-block text-xs font-semibold text-teal-400 hover:text-teal-300 underline">Recommended Action: Schedule Doctor Consult &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="doctors" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Our Medical Specialists</h2>
+                    <p class="text-slate-600 mt-2">Book consultations with verified healthcare leaders.</p>
+                </div>
+                
+                <div class="flex flex-wrap gap-2" id="filterContainer">
+                    <button onclick="filterDoctors('All', this)" class="filter-btn active-filter bg-teal-600 text-white px-4 py-2 rounded-xl text-xs font-medium transition-all">All</button>
+                    <button onclick="filterDoctors('Cardiology', this)" class="filter-btn bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium transition-all hover:bg-slate-100">Cardiology</button>
+                    <button onclick="filterDoctors('Neurology', this)" class="filter-btn bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium transition-all hover:bg-slate-100">Neurology</button>
+                    <button onclick="filterDoctors('Pediatrics', this)" class="filter-btn bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium transition-all hover:bg-slate-100">Pediatrics</button>
+                    <button onclick="filterDoctors('Dermatology', this)" class="filter-btn bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium transition-all hover:bg-slate-100">Dermatology</button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8" id="doctorGrid">
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Patient Health Portal</h2>
+                <p class="text-slate-600 mt-2">Real time metrics and medical records access at your fingertips.</p>
+            </div>
+
+            <div class="p-8 rounded-3xl bg-slate-900 text-white shadow-2xl border border-slate-800">
+                <div class="grid lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
+                        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-2">
+                            <span>Heart Rate</span>
+                            <span class="text-emerald-400">Normal</span>
+                        </div>
+                        <div class="text-3xl font-bold text-white">72 <span class="text-xs font-normal text-slate-400">BPM</span></div>
+                    </div>
+
+                    <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
+                        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-2">
+                            <span>Blood Pressure</span>
+                            <span class="text-emerald-400">Optimal</span>
+                        </div>
+                        <div class="text-3xl font-bold text-white">120/80</div>
+                    </div>
+
+                    <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
+                        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-2">
+                            <span>Sleep Duration</span>
+                            <span class="text-teal-400">Good</span>
+                        </div>
+                        <div class="text-3xl font-bold text-white">7.8 <span class="text-xs font-normal text-slate-400">Hours</span></div>
+                    </div>
+
+                    <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700">
+                        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-2">
+                            <span>Daily Steps</span>
+                            <span class="text-blue-400">84 percent</span>
+                        </div>
+                        <div class="text-3xl font-bold text-white">8,420</div>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 pt-6 border-t border-slate-800">
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-300 mb-4">Upcoming Schedule</h4>
+                        <div class="space-y-3" id="upcomingAppointmentsList">
+                            <div class="p-4 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-sm">
+                                        DR
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-white">Dr. Sarah Jenkins</p>
+                                        <p class="text-xs text-slate-400">Cardiology Video Consultation</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg">Tomorrow, 10:00 AM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-300 mb-4">Vitalis Health Index</h4>
+                        <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex items-center gap-6">
+                            <div class="relative w-24 h-24 flex items-center justify-center rounded-full bg-slate-900 border-4 border-teal-500 text-2xl font-bold text-white">
+                                92
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white text-base">Excellent Health Score</h5>
+                                <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                                    Based on your recent consultations, vitals tracking, and lifestyle habits. Keep up the great work!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-slate-950 text-slate-400 py-16 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-10 mb-12">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-white font-bold text-xl">
+                        <div class="w-8 h-8 rounded-lg bg-teal-600 flex items-center justify-center text-white">
+                            +
+                        </div>
+                        Vitalis
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Leading provider of reliable virtual consultations and modern healthcare management.
+                    </p>
+                </div>
+
+                <div>
+                    <h5 class="text-white text-sm font-semibold mb-4">Navigation</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#doctors" class="hover:text-white transition-colors">Doctors Directory</a></li>
+                        <li><a href="#symptomChecker" class="hover:text-white transition-colors">AI Symptom Assistant</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-white text-sm font-semibold mb-4">Emergency</h5>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-3">
+                        If you are experiencing a life threatening situation, call local emergency services immediately.
+                    </p>
+                    <span class="text-teal-400 font-bold text-sm">Emergency Call: 911</span>
+                </div>
+
+                <div>
+                    <h5 class="text-white text-sm font-semibold mb-4">Contact Us</h5>
+                    <p class="text-xs text-slate-500">support@vitalishealth.com</p>
+                    <p class="text-xs text-slate-500 mt-1">100 Health Plaza, Suite 400</p>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-900 text-center text-xs text-slate-600">
+                &copy; 2026 Vitalis Healthcare. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <div id="bookingModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+            
+            <h3 class="text-xl font-bold text-slate-900 mb-1">Book Consultation</h3>
+            <p id="modalDoctorName" class="text-xs text-teal-600 font-medium mb-6"></p>
+
+            <form onsubmit="confirmBooking(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+                    <input type="text" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-teal-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Select Date</label>
+                    <input type="date" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-teal-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Select Time Slot</label>
+                    <select class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-teal-500">
+                        <option>09:00 AM</option>
+                        <option>11:30 AM</option>
+                        <option>02:00 PM</option>
+                        <option>04:30 PM</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-xl transition-all shadow-md mt-4">
+                    Confirm Appointment
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const doctorsData = [
+            {
+                id: 1,
+                name: "Dr. Sarah Jenkins",
+                specialty: "Cardiology",
+                rating: "4.9",
+                reviews: "128",
+                image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80"
+            },
+            {
+                id: 2,
+                name: "Dr. Marcus Vance",
+                specialty: "Neurology",
+                rating: "4.8",
+                reviews: "94",
+                image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80"
+            },
+            {
+                id: 3,
+                name: "Dr. Elena Rostova",
+                specialty: "Pediatrics",
+                rating: "5.0",
+                reviews: "210",
+                image: "https://images.unsplash.com/photo-1594824813566-78a933f2614d?auto=format&fit=crop&w=400&q=80"
+            },
+            {
+                id: 4,
+                name: "Dr. Aris Thorne",
+                specialty: "Dermatology",
+                rating: "4.7",
+                reviews: "82",
+                image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80"
+            }
+        ];
+
+        let selectedSymptomsList = [];
+        let activeDoctorForBooking = "";
+
+        function renderDoctors(filterCategory = "All") {
+            const grid = document.getElementById("doctorGrid");
+            grid.innerHTML = "";
+
+            const filtered = filterCategory === "All" 
+                ? doctorsData 
+                : doctorsData.filter(doc => doc.specialty === filterCategory);
+
+            filtered.forEach(doc => {
+                const card = document.createElement("div");
+                card.className = "bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <img src="${doc.image}" alt="${doc.name}" class="w-full h-48 object-cover rounded-xl mb-4" onerror="this.src='https://placehold.co/400x300/0F766E/FFFFFF?text=Doctor'">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-semibold text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md">${doc.specialty}</span>
+                            <span class="text-xs font-bold text-slate-700 flex items-center gap-1">★ ${doc.rating} (${doc.reviews})</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">${doc.name}</h3>
+                        <p class="text-xs text-slate-500 mt-1">Available for virtual & in person visits</p>
+                    </div>
+                    <button onclick="openModal('${doc.name}')" class="mt-6 w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl text-xs transition-all">
+                        Schedule Visit
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterDoctors(category, btnElement) {
+            document.querySelectorAll(".filter-btn").forEach(btn => {
+                btn.className = "filter-btn bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl text-xs font-medium transition-all hover:bg-slate-100";
+            });
+            btnElement.className = "filter-btn bg-teal-600 text-white px-4 py-2 rounded-xl text-xs font-medium transition-all";
+            renderDoctors(category);
+        }
+
+        function toggleSymptom(btn, symptomName) {
+            if (selectedSymptomsList.includes(symptomName)) {
+                selectedSymptomsList = selectedSymptomsList.filter(item => item !== symptomName);
+                btn.classList.remove("bg-teal-500", "text-slate-900", "font-bold");
+                btn.classList.add("bg-slate-700", "text-slate-200");
+            } else {
+                selectedSymptomsList.push(symptomName);
+                btn.classList.remove("bg-slate-700", "text-slate-200");
+                btn.classList.add("bg-teal-500", "text-slate-900", "font-bold");
+            }
+        }
+
+        function analyzeSymptoms() {
+            const resultBox = document.getElementById("assessmentResult");
+            const badge = document.getElementById("severityBadge");
+            const text = document.getElementById("assessmentText");
+
+            if (selectedSymptomsList.length === 0) {
+                resultBox.classList.remove("hidden");
+                badge.className = "px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-400";
+                badge.innerText = "Attention";
+                text.innerText = "Please select at least one symptom to run the AI assessment.";
+                return;
+            }
+
+            resultBox.classList.remove("hidden");
+
+            if (selectedSymptomsList.includes("Chest Tightness") || selectedSymptomsList.includes("Dizziness")) {
+                badge.className = "px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-500/20 text-rose-400";
+                badge.innerText = "High Priority";
+                text.innerText = "Symptoms like Chest Tightness or Dizziness require immediate attention. We advise scheduling an urgent appointment or contacting medical emergency services.";
+            } else {
+                badge.className = "px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400";
+                badge.innerText = "Mild Severity";
+                text.innerText = "Selected symptoms suggest a mild routine issue. Ensure rest, stay hydrated, and consult a doctor if symptoms persist over 48 hours.";
+            }
+        }
+
+        function openModal(docName) {
+            activeDoctorForBooking = docName;
+            document.getElementById("modalDoctorName").innerText = docName;
+            document.getElementById("bookingModal").classList.remove("hidden");
+        }
+
+        function closeModal() {
+            document.getElementById("bookingModal").classList.add("hidden");
+        }
+
+        function confirmBooking(event) {
+            event.preventDefault();
+            closeModal();
+            
+            const upcomingList = document.getElementById("upcomingAppointmentsList");
+            const newItem = document.createElement("div");
+            newItem.className = "p-4 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-between";
+            newItem.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-sm">
+                        DR
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-white">${activeDoctorForBooking}</p>
+                        <p class="text-xs text-slate-400">Scheduled Visit</p>
+                    </div>
+                </div>
+                <span class="text-xs bg-teal-500/20 text-teal-300 px-3 py-1.5 rounded-lg font-semibold">Confirmed</span>
+            `;
+            upcomingList.prepend(newItem);
+
+            const toast = document.createElement("div");
+            toast.className = "fixed bottom-6 right-6 bg-emerald-600 text-white px-6 py-4 rounded-2xl shadow-2xl text-xs font-semibold z-50";
+            toast.innerText = "Appointment successfully scheduled with " + activeDoctorForBooking;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 4000);
+        }
+
+        window.onload = function() {
+            renderDoctors();
+        };
+    </script>
+</body>
+</html>
