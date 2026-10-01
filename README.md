@@ -17,10 +17,14 @@ The site is a Progressive Web App. Open it in Chrome or Edge and use the Install
 ## Structure
 
 ```
+index.html         Application page
+sw.js              Service worker
 server/            HTTP server, JSON API, static file serving
 server/data/       Episodes, conditions and symptom weights
-public/            Interface (HTML, CSS, ES modules)
+public/            Styles, scripts, icons and manifest
 ```
+
+Only `index.html`, `sw.js` and the contents of `public/` are served. Everything else in the project stays private.
 
 ## API
 

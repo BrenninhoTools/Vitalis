@@ -6,7 +6,14 @@ import { fileURLToPath } from "node:url";
 import { createGzip } from "node:zlib";
 import { sendText } from "./http.js";
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "public");
+const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const root = path.join(projectRoot, "public");
+
+const rootFiles = new Map([
+  ["/", "index.html"],
+  ["/index.html", "index.html"],
+  ["/sw.js", "sw.js"]
+]);
 
 const mimeTypes = {
   ".html": "text/html; charset=utf-8",
@@ -26,9 +33,10 @@ const mimeTypes = {
 const compressible = new Set([".html", ".css", ".js", ".json", ".webmanifest", ".svg", ".txt"]);
 
 async function resolveFile(pathname) {
+  const rootFile = rootFiles.get(pathname);
   const target = pathname.endsWith("/") ? `${pathname}index.html` : pathname;
-  const filePath = path.join(root, target);
-  if (!filePath.startsWith(root + path.sep)) return null;
+  const filePath = rootFile ? path.join(projectRoot, rootFile) : path.join(root, target);
+  if (!rootFile && !filePath.startsWith(root + path.sep)) return null;
 
   try {
     const info = await stat(filePath);
