@@ -41,6 +41,8 @@
       <symbol id="i-thermometer" viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></symbol>
       <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
       <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+      <symbol id="i-left" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></symbol>
+      <symbol id="i-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
       <symbol id="i-next" viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></symbol>
       <symbol id="i-prev" viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></symbol>
     </defs>
@@ -74,49 +76,68 @@
 
   <main id="main" class="container">
     <section id="view-documentary" class="view" aria-labelledby="epTitle">
-      <div class="view-intro">
-        <span class="eyebrow">Season 1</span>
-        <h2>Medicine, told as cinema</h2>
-        <p>Peer reviewed documentary episodes that turn complex virology into clear visual stories.</p>
+      <div id="cinema" class="cinema">
+        <div id="cinemaBackdrop" class="cinema-backdrop" aria-hidden="true"></div>
+        <div class="cinema-grid">
+          <div class="cinema-copy">
+            <span id="epCategory" class="eyebrow"></span>
+            <h1 id="epTitle"></h1>
+            <p id="epTagline" class="tagline"></p>
+            <ul class="meta-row" aria-label="Episode details">
+              <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span id="epRuntime"></span></li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-film"/></svg><span id="epTopic"></span></li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg><span id="epLevel"></span></li>
+            </ul>
+            <p id="epDescription" class="lead"></p>
+            <div class="cinema-actions">
+              <button id="watchButton" class="button button-primary button-lg" type="button"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>Watch now</button>
+              <button id="prevEpisode" class="icon-button" type="button" aria-label="Previous episode"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button>
+              <button id="nextEpisode" class="icon-button" type="button" aria-label="Next episode"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button>
+              <button id="shareEpisode" class="icon-button" type="button" aria-label="Copy episode link"><svg class="icon" aria-hidden="true"><use href="#i-share"/></svg></button>
+            </div>
+            <p class="credit">Film by <strong id="epSource"></strong></p>
+          </div>
+
+          <div id="stage" class="stage">
+            <img id="stagePoster" alt="" width="1280" height="720">
+            <button id="stagePlay" class="stage-play" type="button" aria-label="Play episode"><span><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg></span></button>
+            <span id="stageTime" class="stage-time"></span>
+            <iframe id="videoPlayer" title="Vitalis documentary episode" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
+          </div>
+        </div>
       </div>
 
-      <div class="player-layout">
-        <div class="player-column">
-          <div class="player-frame">
-            <iframe id="videoPlayer" title="Vitalis documentary episode" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <div class="rail-section">
+        <div class="rail-head">
+          <div>
+            <h2>Season 1</h2>
+            <p id="playlistCount"></p>
           </div>
-
-          <article class="card episode-card">
-            <div class="episode-head">
-              <div>
-                <span id="epCategory" class="badge"></span>
-                <h1 id="epTitle"></h1>
-              </div>
-              <div class="episode-actions">
-                <button id="prevEpisode" class="icon-button" type="button" aria-label="Previous episode"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button>
-                <button id="nextEpisode" class="icon-button" type="button" aria-label="Next episode"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button>
-                <button id="shareEpisode" class="button button-ghost" type="button"><svg class="icon" aria-hidden="true"><use href="#i-share"/></svg>Share</button>
-              </div>
-            </div>
-
-            <p id="epDescription" class="lead"></p>
-
-            <dl class="facts">
-              <div><dt>Medical Director</dt><dd id="epDirector"></dd></div>
-              <div><dt>Scientific Topic</dt><dd id="epTopic" class="accent"></dd></div>
-              <div><dt>Runtime</dt><dd id="epRuntime"></dd></div>
-              <div><dt>Clinical Level</dt><dd id="epLevel"></dd></div>
-            </dl>
-          </article>
+          <div class="rail-controls">
+            <button id="railPrev" class="icon-button" type="button" aria-label="Scroll episodes left"><svg class="icon" aria-hidden="true"><use href="#i-left"/></svg></button>
+            <button id="railNext" class="icon-button" type="button" aria-label="Scroll episodes right"><svg class="icon" aria-hidden="true"><use href="#i-right"/></svg></button>
+          </div>
         </div>
+        <div id="episodeList" class="rail" role="list"></div>
+      </div>
 
-        <aside class="playlist" aria-labelledby="playlistTitle">
-          <div class="playlist-head">
-            <h2 id="playlistTitle">Episodes</h2>
-            <span id="playlistCount" class="muted"></span>
+      <div class="cta-band">
+        <a class="cta-card" href="#protocols">
+          <span class="insight-icon tone-teal"><svg class="icon" aria-hidden="true"><use href="#i-clipboard"/></svg></span>
+          <div>
+            <h3>Treatment protocols</h3>
+            <p>Care guidance for influenza, colds, fever and bronchitis.</p>
           </div>
-          <div id="episodeList" class="playlist-list" role="list"></div>
-        </aside>
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+        <a class="cta-card" href="#assessment">
+          <span class="insight-icon tone-blue"><svg class="icon" aria-hidden="true"><use href="#i-activity"/></svg></span>
+          <div>
+            <h3>Symptom assessment</h3>
+            <p>Compare your symptoms with common viral profiles.</p>
+          </div>
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
       </div>
     </section>
 

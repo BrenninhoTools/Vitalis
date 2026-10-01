@@ -1,4 +1,4 @@
-const version = "vitalis-v3";
+const version = "vitalis-v5";
 
 const shell = [
   "./",

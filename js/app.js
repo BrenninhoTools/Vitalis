@@ -70,77 +70,127 @@ function route() {
   window.scrollTo({ top: 0 });
 }
 
-function episodeUrl(episode, autoplay) {
-  return autoplay ? `${episode.videoUrl}&autoplay=1` : episode.videoUrl;
+function embedUrl(episode) {
+  return `https://www.youtube-nocookie.com/embed/${episode.videoId}?rel=0&modestbranding=1`;
 }
 
-function renderPlaylist() {
+function posterUrl(episode, quality = "hq720") {
+  return `https://i.ytimg.com/vi/${episode.videoId}/${quality}.jpg`;
+}
+
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  return `${minutes}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
+function posterImage(episode, attrs = {}) {
+  const image = el("img", { src: posterUrl(episode), alt: "", ...attrs });
+  image.addEventListener(
+    "error",
+    () => {
+      image.addEventListener("error", () => image.remove(), { once: true });
+      image.src = posterUrl(episode, "mqdefault");
+    },
+    { once: true }
+  );
+  return image;
+}
+
+function renderRail() {
   const list = clear($("episodeList"));
   $("playlistCount").textContent = `${state.episodes.length} episodes`;
 
   state.episodes.forEach((episode) => {
-    const thumbnail = el("img", {
-      src: episode.thumbnail,
-      alt: "",
-      loading: "lazy",
-      width: 208,
-      height: 130
-    });
-    thumbnail.addEventListener("error", () => thumbnail.remove());
-
     list.append(
       el(
         "button",
         {
-          class: "episode-item",
+          class: "rail-card",
           type: "button",
           role: "listitem",
           "data-id": episode.id,
-          "aria-current": episode.id === state.activeEpisode ? "true" : "false",
+          "aria-current": "false",
           onclick: () => selectEpisode(episode.id, { autoplay: true, syncHash: true })
         },
         el(
           "span",
-          { class: "thumb" },
-          thumbnail,
-          el("span", { class: "thumb-overlay" }, el("span", {}, icon("play")))
+          { class: "rail-poster" },
+          posterImage(episode, { loading: "lazy", width: 1280, height: 720 }),
+          el("span", { class: "rail-now", text: "Now showing", hidden: true }),
+          el("span", { class: "rail-number", text: String(episode.id).padStart(2, "0") }),
+          el("span", { class: "rail-time", text: formatTime(episode.seconds) })
         ),
         el(
           "span",
-          { class: "episode-meta" },
-          el("span", { class: "kicker", text: `Episode ${episode.id} / ${episode.category}` }),
-          el("span", { class: "name", text: episode.title }),
-          el("span", { class: "runtime" }, icon("clock"), `${episode.minutes} min`)
+          { class: "rail-meta" },
+          el("span", { class: "kicker", text: episode.category }),
+          el("span", { class: "name", text: episode.title })
         )
       )
     );
   });
 }
 
+function showPoster() {
+  const player = $("videoPlayer");
+  player.removeAttribute("src");
+  player.hidden = true;
+  $("stagePoster").hidden = false;
+  $("stagePlay").hidden = false;
+  $("stageTime").hidden = false;
+}
+
+function playActive() {
+  const episode = state.episodes.find((item) => item.id === state.activeEpisode);
+  if (!episode) return;
+  const player = $("videoPlayer");
+  player.src = `${embedUrl(episode)}&autoplay=1`;
+  player.hidden = false;
+  $("stagePoster").hidden = true;
+  $("stagePlay").hidden = true;
+  $("stageTime").hidden = true;
+}
+
 function selectEpisode(id, { autoplay, syncHash }) {
   const episode = state.episodes.find((item) => item.id === id);
   if (!episode) return;
 
-  const changed = state.activeEpisode !== id;
   state.activeEpisode = id;
 
-  if (changed || autoplay) $("videoPlayer").src = episodeUrl(episode, autoplay);
   $("epTitle").textContent = episode.title;
+  $("epTagline").textContent = episode.tagline;
   $("epCategory").textContent = `Episode ${episode.id} / ${episode.category}`;
   $("epDescription").textContent = episode.description;
-  $("epDirector").textContent = episode.director;
+  $("epSource").textContent = episode.source;
   $("epTopic").textContent = episode.topic;
-  $("epRuntime").textContent = `${episode.minutes} minutes`;
+  $("epRuntime").textContent = formatTime(episode.seconds);
   $("epLevel").textContent = episode.level;
+  $("stageTime").textContent = formatTime(episode.seconds);
+  $("cinemaBackdrop").style.backgroundImage = `url("${posterUrl(episode, "mqdefault")}")`;
+
+  const poster = $("stagePoster");
+  poster.onerror = () => {
+    poster.onerror = null;
+    poster.src = posterUrl(episode, "mqdefault");
+  };
+  poster.src = posterUrl(episode);
 
   const index = state.episodes.findIndex((item) => item.id === id);
   $("prevEpisode").disabled = index <= 0;
   $("nextEpisode").disabled = index >= state.episodes.length - 1;
 
-  document.querySelectorAll(".episode-item").forEach((item) => {
-    item.setAttribute("aria-current", Number(item.dataset.id) === id ? "true" : "false");
+  document.querySelectorAll(".rail-card").forEach((card) => {
+    const active = Number(card.dataset.id) === id;
+    card.setAttribute("aria-current", String(active));
+    card.querySelector(".rail-now").hidden = !active;
   });
 
+  showPoster();
+  $("cinema").classList.add("ready");
+  if (autoplay) {
+    playActive();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
   if (syncHash) history.replaceState(null, "", `#episode-${id}`);
 }
 
@@ -148,6 +198,11 @@ function stepEpisode(offset) {
   const index = state.episodes.findIndex((item) => item.id === state.activeEpisode);
   const next = state.episodes[index + offset];
   if (next) selectEpisode(next.id, { autoplay: true, syncHash: true });
+}
+
+function scrollRail(direction) {
+  const rail = $("episodeList");
+  rail.scrollBy({ left: direction * rail.clientWidth * 0.8, behavior: "smooth" });
 }
 
 async function shareEpisode() {
@@ -162,12 +217,12 @@ async function shareEpisode() {
 
 async function loadEpisodes() {
   const list = $("episodeList");
-  list.replaceChildren(...Array.from({ length: 4 }, () => el("div", { class: "skeleton skeleton-row" })));
+  list.replaceChildren(...Array.from({ length: 4 }, () => el("div", { class: "skeleton rail-skeleton" })));
 
   try {
     const { items } = await api.episodes();
     state.episodes = items;
-    renderPlaylist();
+    renderRail();
     const requested = parseHash().episode;
     const first = items.find((item) => item.id === requested) || items[0];
     if (first) selectEpisode(first.id, { autoplay: false, syncHash: false });
@@ -176,13 +231,16 @@ async function loadEpisodes() {
   }
 }
 
+const diseaseIcons = { flu: "activity", respiratory: "droplet", fever: "thermometer" };
+
 function diseaseCard(disease) {
   return el(
     "article",
-    { class: "card disease-card" },
+    { class: "card disease-card", "data-type": disease.type },
     el(
       "div",
       { class: "body" },
+      el("span", { class: "disease-icon" }, icon(diseaseIcons[disease.type] || "activity")),
       el("span", { class: "badge", text: disease.category }),
       el("h3", { text: disease.name }),
       el("p", { text: disease.shortDesc })
@@ -406,6 +464,10 @@ function syncSoundToggle() {
 
 function bindEvents() {
   $("shareEpisode").addEventListener("click", shareEpisode);
+  $("watchButton").addEventListener("click", playActive);
+  $("stagePlay").addEventListener("click", playActive);
+  $("railPrev").addEventListener("click", () => scrollRail(-1));
+  $("railNext").addEventListener("click", () => scrollRail(1));
   $("prevEpisode").addEventListener("click", () => stepEpisode(-1));
   $("nextEpisode").addEventListener("click", () => stepEpisode(1));
 

@@ -2,11 +2,23 @@ import { assess, filterDiseases, publicSymptoms } from "./assessment.js";
 
 class Unavailable extends Error {}
 
-let apiMissing = false;
+let probe;
 let datasets;
 
+function apiAvailable() {
+  if (!probe) {
+    probe = fetch("api/health")
+      .then((response) => response.ok && (response.headers.get("content-type") || "").includes("json"))
+      .catch(() => {
+        probe = undefined;
+        return false;
+      });
+  }
+  return probe;
+}
+
 async function remote(path, options) {
-  if (apiMissing) throw new Unavailable();
+  if (!(await apiAvailable())) throw new Unavailable();
 
   let response;
   try {
@@ -16,10 +28,7 @@ async function remote(path, options) {
   }
 
   const body = await response.json().catch(() => null);
-  if (!body || response.status >= 500) {
-    if (!body && (response.status === 404 || response.status === 405)) apiMissing = true;
-    throw new Unavailable();
-  }
+  if (!body || response.status >= 500) throw new Unavailable();
   if (!response.ok) throw new Error(body.error || "The request could not be completed.");
   return body;
 }
