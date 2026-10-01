@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vitalis Medical Cinema: documentary episodes, treatment protocols, and a symptom assessment tool for common viral illnesses.">
+  <meta name="theme-color" content="#060b16">
+  <title>Vitalis Medical Documentary Platform</title>
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Vitalis">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+      <symbol id="i-film" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></symbol>
+      <symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></symbol>
+      <symbol id="i-activity" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+      <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol>
+      <symbol id="i-mute" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+      <symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></symbol>
+      <symbol id="i-thermometer" viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+      <symbol id="i-next" viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></symbol>
+      <symbol id="i-prev" viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#documentary" aria-label="Vitalis home">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-activity"/></svg></span>
+        <span class="brand-text"><strong>Vitalis</strong><small>Medical Cinema</small></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="#documentary" data-view="documentary"><svg class="icon" aria-hidden="true"><use href="#i-film"/></svg><span>Docuseries</span></a>
+        <a href="#protocols" data-view="protocols"><svg class="icon" aria-hidden="true"><use href="#i-clipboard"/></svg><span>Protocols</span></a>
+        <a href="#assessment" data-view="assessment"><svg class="icon" aria-hidden="true"><use href="#i-activity"/></svg><span>Assessment</span></a>
+        <a href="#insights" data-view="insights"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg><span>Insights</span></a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="soundToggle" class="icon-button" type="button" aria-pressed="false" aria-label="Enable interface sounds">
+          <svg class="icon" aria-hidden="true"><use id="soundIcon" href="#i-mute"/></svg>
+        </button>
+        <button id="installButton" class="button button-ghost" type="button" hidden><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>Install app</span></button>
+        <a class="button button-primary header-cta" href="#protocols">Treatment Guide</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section id="view-documentary" class="view" aria-labelledby="epTitle">
+      <div class="view-intro">
+        <span class="eyebrow">Season 1</span>
+        <h2>Medicine, told as cinema</h2>
+        <p>Peer reviewed documentary episodes that turn complex virology into clear visual stories.</p>
+      </div>
+
+      <div class="player-layout">
+        <div class="player-column">
+          <div class="player-frame">
+            <iframe id="videoPlayer" title="Vitalis documentary episode" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+
+          <article class="card episode-card">
+            <div class="episode-head">
+              <div>
+                <span id="epCategory" class="badge"></span>
+                <h1 id="epTitle"></h1>
+              </div>
+              <div class="episode-actions">
+                <button id="prevEpisode" class="icon-button" type="button" aria-label="Previous episode"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button>
+                <button id="nextEpisode" class="icon-button" type="button" aria-label="Next episode"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button>
+                <button id="shareEpisode" class="button button-ghost" type="button"><svg class="icon" aria-hidden="true"><use href="#i-share"/></svg>Share</button>
+              </div>
+            </div>
+
+            <p id="epDescription" class="lead"></p>
+
+            <dl class="facts">
+              <div><dt>Medical Director</dt><dd id="epDirector"></dd></div>
+              <div><dt>Scientific Topic</dt><dd id="epTopic" class="accent"></dd></div>
+              <div><dt>Runtime</dt><dd id="epRuntime"></dd></div>
+              <div><dt>Clinical Level</dt><dd id="epLevel"></dd></div>
+            </dl>
+          </article>
+        </div>
+
+        <aside class="playlist" aria-labelledby="playlistTitle">
+          <div class="playlist-head">
+            <h2 id="playlistTitle">Episodes</h2>
+            <span id="playlistCount" class="muted"></span>
+          </div>
+          <div id="episodeList" class="playlist-list" role="list"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="view-protocols" class="view" aria-labelledby="protocolsTitle" hidden>
+      <div class="hero">
+        <span class="eyebrow">Medical Guidance Protocols</span>
+        <h2 id="protocolsTitle">Disease Management and Recovery</h2>
+        <p>Evidence based clinical protocols for treating common viral flu, seasonal illnesses, and fever progression.</p>
+      </div>
+
+      <div class="toolbar">
+        <label class="search" for="diseaseSearch">
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="diseaseSearch" type="search" placeholder="Search conditions" autocomplete="off" maxlength="80">
+        </label>
+        <div id="diseaseFilters" class="chips" role="group" aria-label="Filter conditions">
+          <button class="chip" type="button" data-type="all" aria-pressed="true">All</button>
+          <button class="chip" type="button" data-type="flu" aria-pressed="false">Influenza</button>
+          <button class="chip" type="button" data-type="respiratory" aria-pressed="false">Respiratory</button>
+          <button class="chip" type="button" data-type="fever" aria-pressed="false">Viral Fever</button>
+        </div>
+      </div>
+
+      <p id="diseaseCount" class="muted result-count" aria-live="polite"></p>
+      <div id="diseaseGrid" class="grid grid-3"></div>
+    </section>
+
+    <section id="view-assessment" class="view" aria-labelledby="assessmentTitle" hidden>
+      <div class="assessment-layout">
+        <div class="assessment-input">
+          <div class="hero hero-plain">
+            <span class="eyebrow eyebrow-blue">Interactive Health Matrix</span>
+            <h2 id="assessmentTitle">Symptom Assessment</h2>
+            <p>Select the symptoms you are experiencing to compare them against common viral profiles and receive care guidance.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <h3>Present symptoms</h3>
+              <span id="symptomCount" class="muted">None selected</span>
+            </div>
+            <div id="symptomList" class="chips chips-wrap" role="group" aria-label="Symptoms"></div>
+            <div class="button-row">
+              <button id="evaluateButton" class="button button-primary button-block" type="button" disabled>Evaluate Profile</button>
+              <button id="clearButton" class="button button-ghost" type="button" disabled>Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="assessmentResult" class="card result" aria-live="polite" tabindex="-1">
+          <div class="result-empty">
+            <svg class="icon icon-xl" aria-hidden="true"><use href="#i-activity"/></svg>
+            <h3>Your assessment appears here</h3>
+            <p>Choose one or more symptoms, then evaluate to see matching conditions and recommended next steps.</p>
+          </div>
+          <p class="disclaimer">This educational platform provides clinical context and does not replace professional emergency care or a medical diagnosis.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-insights" class="view" aria-labelledby="insightsTitle" hidden>
+      <div class="hero hero-plain">
+        <span class="eyebrow">Clinical Insights</span>
+        <h2 id="insightsTitle">The science behind recovery</h2>
+        <p>Three principles that shape how the series approaches viral illness.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card insight">
+          <span class="insight-icon tone-teal"><svg class="icon" aria-hidden="true"><use href="#i-droplet"/></svg></span>
+          <h3>Hydration Science</h3>
+          <p>Electrolyte balances maintain cellular fluid pressure during febrile responses. Oral rehydration solutions enhance systemic recovery significantly.</p>
+        </article>
+        <article class="card insight">
+          <span class="insight-icon tone-blue"><svg class="icon" aria-hidden="true"><use href="#i-thermometer"/></svg></span>
+          <h3>Fever Regulation</h3>
+          <p>Fever is an evolutionary defense mechanism inhibiting viral replication. Antipyretics should be used strategically under clinical oversight.</p>
+        </article>
+        <article class="card insight">
+          <span class="insight-icon tone-green"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+          <h3>Antiviral Timelines</h3>
+          <p>Targeted antiviral treatments demonstrate maximum efficacy when administered within 48 hours of initial symptomatic onset.</p>
+        </article>
+      </div>
+
+      <article class="card production">
+        <h3>Documentary Production Insights</h3>
+        <div class="columns">
+          <p>Vitalis Medical Cinema collaborates with leading virology institutes and clinical researchers worldwide. Our docuseries translates complex pathogenic studies into accessible visual medical narratives.</p>
+          <p>Each episode undergoes rigorous peer review by board certified physicians and infectious disease experts to ensure factual clinical accuracy and safety guidelines.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="brand brand-small">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-activity"/></svg></span>
+        <span class="brand-text"><strong>Vitalis Medical Platform</strong></span>
+      </div>
+      <p class="muted">&copy; 2026 Vitalis Educational Healthcare Media. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <dialog id="protocolDialog" class="dialog" aria-labelledby="dialogTitle">
+    <div class="dialog-body">
+      <button id="dialogClose" class="icon-button dialog-close" type="button" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+      <span id="dialogCategory" class="badge"></span>
+      <h3 id="dialogTitle"></h3>
+
+      <section class="panel">
+        <h4>Clinical Description</h4>
+        <p id="dialogDescription"></p>
+      </section>
+
+      <section>
+        <h4>Core Treatment Protocols</h4>
+        <ul id="dialogProtocols" class="checklist"></ul>
+      </section>
+
+      <section class="panel panel-muted">
+        <h4>Recovery Timeline</h4>
+        <p id="dialogTimeline"></p>
+      </section>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <noscript><p class="noscript">Vitalis needs JavaScript enabled to load episodes and protocols.</p></noscript>
+</body>
+</html>

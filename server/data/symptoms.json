@@ -1,0 +1,10 @@
+[
+  { "key": "highFever", "label": "High Fever", "weights": { "fluA": 3, "rhino": 0.5, "viralFever": 3, "bronchitis": 0.5 } },
+  { "key": "dryCough", "label": "Persistent Dry Cough", "weights": { "fluA": 2, "rhino": 1, "viralFever": 0, "bronchitis": 3 } },
+  { "key": "bodyAches", "label": "Severe Body Aches", "weights": { "fluA": 3, "rhino": 0.5, "viralFever": 1.5, "bronchitis": 0 } },
+  { "key": "fatigue", "label": "Extreme Fatigue", "weights": { "fluA": 2.5, "rhino": 1, "viralFever": 2, "bronchitis": 1 } },
+  { "key": "soreThroat", "label": "Sore Throat", "weights": { "fluA": 1, "rhino": 3, "viralFever": 0.5, "bronchitis": 0.5 } },
+  { "key": "nasalCongestion", "label": "Nasal Congestion", "weights": { "fluA": 1, "rhino": 3, "viralFever": 0, "bronchitis": 0.5 } },
+  { "key": "chills", "label": "Chills and Sweats", "weights": { "fluA": 2, "rhino": 0.5, "viralFever": 3, "bronchitis": 0 } },
+  { "key": "shortnessOfBreath", "label": "Breathing Difficulty", "redFlag": true, "weights": { "fluA": 1.5, "rhino": 0, "viralFever": 0, "bronchitis": 2.5 } }
+]

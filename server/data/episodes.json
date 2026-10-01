@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "The Influenza Blueprint: How Viruses Invade",
+    "category": "Viral Immunology",
+    "description": "Explore the molecular mechanisms behind seasonal influenza strains and viral cellular entry. Understand how human immune defenses respond during the first critical 48 hours of infection.",
+    "videoUrl": "https://www.youtube-nocookie.com/embed/8I4yJ-T8Akg?rel=0",
+    "minutes": 24,
+    "thumbnail": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=600&q=80",
+    "director": "Dr. Helena Vance, MD",
+    "topic": "Influenza A and B",
+    "level": "Public Health"
+  },
+  {
+    "id": 2,
+    "title": "Decoding the Common Cold vs Influenza",
+    "category": "Clinical Diagnosis",
+    "description": "A comprehensive clinical comparison between Rhinoviruses and Orthomyxoviridae. Learn how symptomatic onset speeds differentiate upper respiratory infections from systemic flu.",
+    "videoUrl": "https://www.youtube-nocookie.com/embed/y32S4E48cT4?rel=0",
+    "minutes": 18,
+    "thumbnail": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80",
+    "director": "Dr. Helena Vance, MD",
+    "topic": "Rhinovirus and Influenza",
+    "level": "Clinical Practice"
+  },
+  {
+    "id": 3,
+    "title": "Fever and Immune Mobilization",
+    "category": "Human Physiology",
+    "description": "Discover why human core temperatures rise during pathogenic attacks. Examine pyrogens, hypothalamic set point shifts, and effective fever management strategies.",
+    "videoUrl": "https://www.youtube-nocookie.com/embed/QnQe0xW_JY4?rel=0",
+    "minutes": 22,
+    "thumbnail": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80",
+    "director": "Dr. Helena Vance, MD",
+    "topic": "Thermoregulation",
+    "level": "Foundational"
+  },
+  {
+    "id": 4,
+    "title": "Modern Antivirals and Hydration Protocols",
+    "category": "Pharmacology",
+    "description": "An in depth look at neuraminidase inhibitors, cellular hydration mechanics, and symptom relief agents designed to shorten recovery timelines safely.",
+    "videoUrl": "https://www.youtube-nocookie.com/embed/f_A8-C01tHk?rel=0",
+    "minutes": 20,
+    "thumbnail": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80",
+    "director": "Dr. Helena Vance, MD",
+    "topic": "Neuraminidase inhibitors",
+    "level": "Pharmacology"
+  }
+]

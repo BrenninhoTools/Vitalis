@@ -1,0 +1,62 @@
+[
+  {
+    "id": "fluA",
+    "name": "Seasonal Influenza (Flu A & B)",
+    "type": "flu",
+    "category": "Viral Infection",
+    "shortDesc": "Systemic viral infection characterized by sudden high fever, body aches, and respiratory fatigue.",
+    "fullDesc": "Influenza viruses infect the epithelial cells of the respiratory tract. Transmission occurs via aerosol droplets. Rapid onset requires immediate rest and early therapeutic intervention.",
+    "protocols": [
+      "Optimal bed rest during peak febrile periods (days 1 through 4)",
+      "Oral rehydration solution containing balanced sodium and glucose",
+      "Antipyretics used according to clinical guidelines for fever comfort",
+      "Targeted antiviral therapies evaluated by healthcare professionals within 48 hours"
+    ],
+    "timeline": "7 to 10 days for full acute symptom resolution. Persistent fatigue may continue for two weeks."
+  },
+  {
+    "id": "rhino",
+    "name": "Acute Rhinovirus Cold",
+    "type": "respiratory",
+    "category": "Upper Respiratory",
+    "shortDesc": "Mild upper respiratory viral illness centered primarily in nasal passages and throat mucosa.",
+    "fullDesc": "Rhinoviruses thrive in cooler nasal temperatures, causing localized swelling, sneezing, and clear mucosal secretions without severe systemic fever.",
+    "protocols": [
+      "Saline nasal rinses to clear congested airways gently",
+      "Warm fluid consumption including honey infusions for sore throat ease",
+      "Adequate sleep to facilitate endogenous immune antibody production",
+      "Humidified air exposure to soothe inflamed upper airway passages"
+    ],
+    "timeline": "5 to 7 days. Most individuals return to baseline activities within one week."
+  },
+  {
+    "id": "viralFever",
+    "name": "Systemic Viral Fever Syndrome",
+    "type": "fever",
+    "category": "Systemic Viral",
+    "shortDesc": "Fever response accompanying non specific viral exposure, often causing chills and weakness.",
+    "fullDesc": "Systemic immune signaling releases cytokines, triggering hypothalamic thermoregulation shifts that elevate body temperature to combat viral replication.",
+    "protocols": [
+      "Frequent core temperature monitoring every four hours",
+      "Light breathable clothing and cool ambient room environments",
+      "Continuous fluid intake to replenish perspiration losses",
+      "Avoidance of heavy physical strain until fever subsides completely"
+    ],
+    "timeline": "3 to 5 days of febrile activity followed by gradual energy recovery."
+  },
+  {
+    "id": "bronchitis",
+    "name": "Acute Viral Bronchitis",
+    "type": "respiratory",
+    "category": "Bronchial Airways",
+    "shortDesc": "Inflammation of bronchial air passages following initial viral colds or flu infections.",
+    "fullDesc": "Viral inflammation increases bronchial mucus production, leading to persistent coughing fits aimed at clearing bronchial passages.",
+    "protocols": [
+      "Steam inhalation treatments twice daily for bronchial relaxation",
+      "Cough suppressant or expectorant formulations as guided by physicians",
+      "Complete avoidance of environmental smoke or chemical irritants",
+      "High volume fluid intake to thin bronchial secretions effectively"
+    ],
+    "timeline": "10 to 21 days for bronchial cough clearance."
+  }
+]
