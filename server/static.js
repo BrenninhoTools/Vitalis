@@ -12,7 +12,8 @@ const root = path.join(projectRoot, "public");
 const rootFiles = new Map([
   ["/", "index.html"],
   ["/index.html", "index.html"],
-  ["/sw.js", "sw.js"]
+  ["/sw.js", "sw.js"],
+  ["/manifest.json", "manifest.json"]
 ]);
 
 const mimeTypes = {
@@ -20,7 +21,6 @@ const mimeTypes = {
   ".css": "text/css; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8",
-  ".webmanifest": "application/manifest+json; charset=utf-8",
   ".svg": "image/svg+xml",
   ".png": "image/png",
   ".jpg": "image/jpeg",
@@ -30,7 +30,7 @@ const mimeTypes = {
   ".txt": "text/plain; charset=utf-8"
 };
 
-const compressible = new Set([".html", ".css", ".js", ".json", ".webmanifest", ".svg", ".txt"]);
+const compressible = new Set([".html", ".css", ".js", ".json", ".svg", ".txt"]);
 
 async function resolveFile(pathname) {
   const rootFile = rootFiles.get(pathname);

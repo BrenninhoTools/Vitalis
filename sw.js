@@ -1,4 +1,4 @@
-const version = "vitalis-v1";
+const version = "vitalis-v2";
 
 const shell = [
   "/",
@@ -8,7 +8,7 @@ const shell = [
   "/js/audio.js",
   "/js/dom.js",
   "/favicon.svg",
-  "/manifest.webmanifest",
+  "/manifest.json",
   "/icons/icon-192.png",
   "/icons/icon-512.png"
 ];

@@ -19,12 +19,13 @@ The site is a Progressive Web App. Open it in Chrome or Edge and use the Install
 ```
 index.html         Application page
 sw.js              Service worker
+manifest.json      Web app manifest
 server/            HTTP server, JSON API, static file serving
 server/data/       Episodes, conditions and symptom weights
-public/            Styles, scripts, icons and manifest
+public/            Styles, scripts and icons
 ```
 
-Only `index.html`, `sw.js` and the contents of `public/` are served. Everything else in the project stays private.
+Only `index.html`, `sw.js`, `manifest.json` and the contents of `public/` are served. Everything else in the project stays private.
 
 ## API
 
