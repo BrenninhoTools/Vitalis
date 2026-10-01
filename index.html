@@ -41,6 +41,8 @@
       <symbol id="i-thermometer" viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></symbol>
       <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
       <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
       <symbol id="i-left" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></symbol>
       <symbol id="i-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
       <symbol id="i-next" viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></symbol>
@@ -65,8 +67,9 @@
       </nav>
 
       <div class="header-actions">
-        <button id="soundToggle" class="icon-button" type="button" aria-pressed="false" aria-label="Enable interface sounds">
-          <svg class="icon" aria-hidden="true"><use id="soundIcon" href="#i-mute"/></svg>
+        <button id="optionsButton" class="icon-button options-button" type="button" aria-haspopup="dialog" aria-label="Open options">
+          <svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg>
+          <span id="optionsDot" class="status-dot" hidden></span>
         </button>
         <button id="installButton" class="button button-ghost" type="button" hidden><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span>Install app</span></button>
         <a class="button button-primary header-cta" href="#protocols">Treatment Guide</a>
@@ -263,6 +266,45 @@
         <h4>Recovery Timeline</h4>
         <p id="dialogTimeline"></p>
       </section>
+    </div>
+  </dialog>
+
+  <dialog id="optionsDialog" class="drawer" aria-labelledby="optionsTitle">
+    <div class="drawer-body">
+      <div class="drawer-head">
+        <h2 id="optionsTitle">Options</h2>
+        <button id="optionsClose" class="icon-button" type="button" aria-label="Close options"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+      </div>
+
+      <section class="drawer-section" aria-labelledby="accountTitle">
+        <h3 id="accountTitle">Account</h3>
+        <div id="accountOut">
+          <p class="muted">Sign in with Google to see your profile here and resume the last episode you watched on this device.</p>
+          <div id="googleButton" class="google-slot"></div>
+          <p id="accountNote" class="note" role="status" hidden></p>
+        </div>
+        <div id="accountIn" class="account-card" hidden>
+          <img id="accountPhoto" class="avatar" alt="" width="52" height="52" referrerpolicy="no-referrer" hidden>
+          <div class="account-info">
+            <strong id="accountName"></strong>
+            <span id="accountEmail" class="muted"></span>
+          </div>
+          <button id="signOut" class="button button-ghost" type="button"><svg class="icon" aria-hidden="true"><use href="#i-logout"/></svg>Sign out</button>
+        </div>
+      </section>
+
+      <section class="drawer-section" aria-labelledby="prefsTitle">
+        <h3 id="prefsTitle">Preferences</h3>
+        <div class="setting">
+          <div>
+            <strong id="soundLabel">Interface sounds</strong>
+            <span class="muted">Soft clicks, and a heartbeat on urgent results.</span>
+          </div>
+          <button id="soundSwitch" class="switch" type="button" role="switch" aria-checked="false" aria-labelledby="soundLabel"><span></span></button>
+        </div>
+      </section>
+
+      <p class="drawer-foot muted">Vitalis Medical Platform. Educational content only.</p>
     </div>
   </dialog>
 

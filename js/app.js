@@ -1,5 +1,15 @@
 import { api } from "./api.js";
 import { webAudio } from "./audio.js";
+import {
+  clearAccount,
+  decodeCredential,
+  loadClientId,
+  loadGoogle,
+  readAccount,
+  recallEpisode,
+  rememberEpisode,
+  saveAccount
+} from "./account.js";
 import { clear, debounce, el, icon } from "./dom.js";
 
 const views = ["documentary", "protocols", "assessment", "insights"];
@@ -18,7 +28,9 @@ const state = {
   query: "",
   symptoms: [],
   selected: new Set(),
-  requestId: 0
+  requestId: 0,
+  account: readAccount(),
+  googleReady: false
 };
 
 const $ = (id) => document.getElementById(id);
@@ -191,7 +203,10 @@ function selectEpisode(id, { autoplay, syncHash }) {
     playActive();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
-  if (syncHash) history.replaceState(null, "", `#episode-${id}`);
+  if (syncHash) {
+    history.replaceState(null, "", `#episode-${id}`);
+    if (state.account) rememberEpisode(state.account.sub, id);
+  }
 }
 
 function stepEpisode(offset) {
@@ -223,7 +238,7 @@ async function loadEpisodes() {
     const { items } = await api.episodes();
     state.episodes = items;
     renderRail();
-    const requested = parseHash().episode;
+    const requested = parseHash().episode || (state.account ? recallEpisode(state.account.sub) : null);
     const first = items.find((item) => item.id === requested) || items[0];
     if (first) selectEpisode(first.id, { autoplay: false, syncHash: false });
   } catch (error) {
@@ -455,11 +470,88 @@ async function loadSymptoms() {
   }
 }
 
-function syncSoundToggle() {
-  const toggle = $("soundToggle");
-  toggle.setAttribute("aria-pressed", String(webAudio.enabled));
-  toggle.setAttribute("aria-label", webAudio.enabled ? "Disable interface sounds" : "Enable interface sounds");
-  $("soundIcon").setAttribute("href", webAudio.enabled ? "#i-volume" : "#i-mute");
+function renderAccount() {
+  const account = state.account;
+  $("accountOut").hidden = Boolean(account);
+  $("accountIn").hidden = !account;
+  $("optionsDot").hidden = !account;
+  if (!account) return;
+
+  $("accountName").textContent = account.name;
+  $("accountEmail").textContent = account.email;
+  const photo = $("accountPhoto");
+  photo.hidden = !account.picture;
+  if (account.picture) photo.src = account.picture;
+}
+
+function showAccountNote(message) {
+  const note = $("accountNote");
+  note.hidden = !message;
+  note.textContent = message || "";
+}
+
+function signIn(credential, clientId) {
+  try {
+    state.account = decodeCredential(credential, clientId);
+    saveAccount(state.account);
+    renderAccount();
+    toast(`Signed in as ${state.account.name}`);
+  } catch {
+    toast("Sign in failed. Please try again.");
+  }
+}
+
+function signOut() {
+  clearAccount();
+  state.account = null;
+  if (window.google) window.google.accounts.id.disableAutoSelect();
+  renderAccount();
+  toast("Signed out");
+  setupGoogle();
+}
+
+async function setupGoogle() {
+  if (state.account || state.googleReady) return;
+
+  const clientId = await loadClientId();
+  if (!clientId) {
+    showAccountNote("Google sign in is not configured yet. Add your Google client ID to data/config.json.");
+    return;
+  }
+
+  try {
+    const google = await loadGoogle();
+    google.accounts.id.initialize({
+      client_id: clientId,
+      callback: ({ credential }) => signIn(credential, clientId),
+      auto_select: false,
+      cancel_on_tap_outside: true
+    });
+    clear($("googleButton"));
+    google.accounts.id.renderButton($("googleButton"), {
+      theme: "filled_black",
+      size: "large",
+      shape: "pill",
+      text: "signin_with",
+      logo_alignment: "left",
+      width: 280
+    });
+    state.googleReady = true;
+    showAccountNote("");
+  } catch (error) {
+    showAccountNote(error.message);
+  }
+}
+
+function openOptions() {
+  renderAccount();
+  const dialog = $("optionsDialog");
+  if (!dialog.open) dialog.showModal();
+  setupGoogle();
+}
+
+function syncSoundSwitch() {
+  $("soundSwitch").setAttribute("aria-checked", String(webAudio.enabled));
 }
 
 function bindEvents() {
@@ -493,16 +585,22 @@ function bindEvents() {
     if (event.target === dialog) dialog.close();
   });
 
-  $("soundToggle").addEventListener("click", () => {
+  $("optionsButton").addEventListener("click", openOptions);
+  $("signOut").addEventListener("click", signOut);
+
+  const options = $("optionsDialog");
+  $("optionsClose").addEventListener("click", () => options.close());
+  options.addEventListener("click", (event) => {
+    if (event.target === options) options.close();
+  });
+
+  $("soundSwitch").addEventListener("click", () => {
     webAudio.setEnabled(!webAudio.enabled);
-    syncSoundToggle();
-    webAudio.playInterfaceClick();
+    syncSoundSwitch();
   });
 
   document.addEventListener("click", (event) => {
-    if (event.target.closest("button:not(:disabled), a[href]") && !event.target.closest("#soundToggle")) {
-      webAudio.playInterfaceClick();
-    }
+    if (event.target.closest("button:not(:disabled), a[href]")) webAudio.playInterfaceClick();
   });
 
   window.addEventListener("hashchange", route);
@@ -539,6 +637,7 @@ function setupInstall() {
 
 bindEvents();
 setupInstall();
-syncSoundToggle();
+syncSoundSwitch();
+renderAccount();
 showView(parseHash().view);
 Promise.all([loadEpisodes(), loadDiseases(), loadSymptoms()]).then(route);

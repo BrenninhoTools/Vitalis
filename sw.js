@@ -1,13 +1,15 @@
-const version = "vitalis-v5";
+const version = "vitalis-v6";
 
 const shell = [
   "./",
   "css/styles.css",
   "js/app.js",
+  "js/account.js",
   "js/api.js",
   "js/assessment.js",
   "js/audio.js",
   "js/dom.js",
+  "data/config.json",
   "data/episodes.json",
   "data/diseases.json",
   "data/symptoms.json",

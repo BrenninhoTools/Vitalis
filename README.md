@@ -10,6 +10,16 @@ npm start
 
 Open http://127.0.0.1:3000. Set `PORT` and `HOST` to change the address. Use `npm run dev` to restart on changes.
 
+## Google sign in
+
+The gear in the header opens the options panel, where visitors can sign in with Google and turn interface sounds on or off. Sign in needs a Google client ID, which is public and safe to commit:
+
+1. In the Google Cloud Console open APIs and Services, then Credentials, and create an OAuth client ID of type Web application.
+2. Under Authorized JavaScript origins add every address that serves the site, for example `http://localhost:3000` and `https://brenninhotools.github.io`.
+3. Copy the client ID into `data/config.json` as `googleClientId`.
+
+Until an ID is set, the panel explains that sign in is not configured. The profile (name, email, photo) and the last episode watched are kept only in the browser on that device.
+
 ## Install as an app
 
 The site is a Progressive Web App. Open it in Chrome or Edge and use the Install app button in the header, or the install icon in the address bar. On iOS use Share, then Add to Home Screen. Installation requires HTTPS, except on localhost. Pages and data already visited keep working offline.
