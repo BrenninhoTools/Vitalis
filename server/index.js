@@ -41,5 +41,6 @@ process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
 
 server.listen(port, host, () => {
-  process.stdout.write(`Vitalis running at http://${host}:${port}\n`);
+  const label = host === "127.0.0.1" ? "localhost" : host;
+  process.stdout.write(`Vitalis running at http://${label}:${port}\n`);
 });
